@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="<?php echo base_url() ?>appoint/css/sweetalert.css" />
 	<link href="<?php echo base_url() ?>appoint/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="<?php echo base_url() ?>appoint/css/style.css" />
+	<script src="<?php echo base_url() ?>appoint/lib/layui/layui.js"></script>
 	<script src="<?php echo base_url() ?>appoint/js/jquery.min.js"></script>
 	<script src="<?php echo base_url() ?>appoint/js/local.js"></script>
 	<script src="<?php echo base_url() ?>appoint/js/jquery.validate.min.js"></script>

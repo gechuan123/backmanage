@@ -19,7 +19,7 @@
       line-height: 30px;
       border: 1px solid #ece9e9;
       position: fixed;
-      top: 0px;
+      top: 110px;
       box-shadow: 0 5px 15px #c3bebe;
     }
     .zai-class ul li{
