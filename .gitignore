@@ -1,7 +1,8 @@
-# *.htaccess*.htaccess-server
-# application/config
-# application/logs
-# application/sessions
-# nginx.htaccess
-application/sessions/ci_sessionb3gru496do1oter9cn31rsj1d0lhk2i6
-nginx.htaccess
+#生成目录
+*.htaccess
+*.htaccess-server
+*nginx.htaccess
+application/config/
+application/logs/
+application/sessions/
+
