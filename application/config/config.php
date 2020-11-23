@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 //$config['base_url'] = 'http://xsight.sakura.ne.jp/aadmin';
-$config['base_url'] = 'http://192.168.1.53:8084';
+$config['base_url'] = 'http://www.backmanage.com/';
 /*
 |--------------------------------------------------------------------------
 | Index File
