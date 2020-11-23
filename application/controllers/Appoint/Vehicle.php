@@ -9,10 +9,6 @@ class Vehicle extends Appoint
     }
     public function index()
     {
-        $this->load->view('appoint/vlist');
-    }
-    public function vaddform()
-    {
-        $this->load->view('appoint/vaddform');
+        $this->load->view('appoint/vehicle');
     }
 }

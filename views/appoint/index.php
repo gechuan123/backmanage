@@ -1,42 +1,81 @@
-<?php $this->load->view('appoint/header');?>
-<section class="hero">
-    <div class="hero-box">
-        <h2>ユウソリューションズ株式会社<br><span>修理申込 ・ 修理状況</span>確認サイト</h2>
-        <p>この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために<br>入れています。この文章はダミーです。文字の大きさ、量、字間、行間等を確認<br>するために入れています。</p>
-    </div>
-    <div class="xslider do">
-        <div class="xslide">
-            <picture>
-                <source media="(max-width:500px)" srcset="<?php echo base_url()?>repair/img/hero-sp.jpg">
-                <img src="<?php echo base_url()?>repair/img/hero.jpg" alt="">
-            </picture>
-        </div>
-    </div>
-</section>
-<section class="inner">
-    <div class="company">
-        <p>ユウソリューションズ株式会社のオンライン<br> 修理申込や現在依頼しております内容の<span class="nowrap">ステータスをこちらの</span>
-            <br> サイトからご覧いただけます。
-        </p>
-        <a href="javascript:void(0)" class="more">詳しく見る<i class="fas fa-caret-right"></i></a>
-    </div>
-</section>
-<section class="news">
-    <div class="title">
-        <h3>新着情報</h3>
-        <span>news</span>
-    </div>
-    <ul class="inner">
-        <li>
-            <span>2020.05.25</span><a href="">2020年スマホのカメラおすすめランキング！ 綺麗に撮れる高性能なモデルはいったいどれ？</a>
-        </li>
-        <li>
-            <span>2020.05.25</span><a href="">2020年スマホのカメラおすすめランキング！ 綺麗に撮れる高性能なモデルはいったいどれ？</a>
-        </li>
-        <li>
-            <span>2020.05.25</span><a href="">2020年スマホのカメラおすすめランキング！ 綺麗に撮れる高性能なモデルはいったいどれ？</a>
-        </li>
-    </ul>
-    <a href="javascript:void(0)" class="more">詳しく見る<i class="fas fa-caret-right"></i></a>
-</section>
+<?php $this->load->view('appoint/header');?>	
+<div class="pages">
+	<h2>予約時間を選択</h2>
+	<span>Please select a reservation time</span>
+</div>
+<div class="mainpage inner">
+	<div class="table-1">
+		<div class="member-tit">
+			予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？<br>
+			予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？<br>
+		</div>
+		<form action="" method="post" id="rForm">
+			<table>
+				<tr>
+					<td>予約</td>
+					<td><input type="text" name="start_ymd" id="start_ymd" value=""></td>
+				</tr>
+
+					<td>予約</td>
+					<td><input type="text" name="start_his" id="start_his" value=""></td>
+				</tr>
+				<tr id="table-id">
+					<td>予約</td>
+					<td>
+						<label>
+							<input type="radio" name="is_app" value="1" checked="checked">予約
+						</label>
+						<label>
+							<input type="radio" name="is_app" value="2">予約
+						</label>
+						<label id="is_app_title"></label>
+					</td>
+				</tr>
+				<tr id="table-id" class="form_is_type">
+					<td>予約</td>
+					<td>
+						<label><input type="radio" name="is_type" value="1" checked>予約</label>
+						<label><input type="radio" name="is_type" value="2">予約</label>
+						<label><input type="radio" name="is_type" value="3">予約</label>
+						<label><input type="radio" name="is_type" value="4">予約</label>
+					</td>
+				</tr>
+				
+				<tr class="tel"> 
+					<td>予約</td>
+					<td><input type="text" name="tel" id="tel" autocomplete="off"  value=""></td>
+				</tr>
+				
+				<tr class="form_realname">
+					<td>予約</td>
+					<td><input type="text" name="realname" id="realname" autocomplete="off" placeholder="" value=""></td>
+				</tr>
+				
+				<tr class="form_email">
+					<td>予約</td>
+					<td><input type="text" name="email" id="email" autocomplete="off" placeholder="" value=""></td>
+				</tr>
+				
+				<tr class="form_email">
+					<td>予約</td>
+					<td><input type="text" name="confirm_email" autocomplete="off" placeholder="" value=""></td>
+				</tr>
+				<tr class="form_age">
+					<td>予約</td>
+					<td>
+						<label><input type="radio" name="age" value="1">15歳～</label>
+						<label><input type="radio" name="age" value="2">20代</label>
+						<label><input type="radio" name="age" value="3">30代</label>
+						<label><input type="radio" name="age" value="4">40代</label>
+						<label><input type="radio" name="age" value="5">50代</label>
+						<label><input type="radio" name="age" value="6">60代</label>
+					</td>
+				</tr>
+			</table>
+			<div class="submit"><input type="submit" value="予約" /></div>
+		</form>
+	</div>
+</div>
+<script type="text/javascript">
+</script>
 <?php $this->load->view('appoint/footer');?>

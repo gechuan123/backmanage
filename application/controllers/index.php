@@ -7,6 +7,6 @@ class Index extends CI_Controller{
 		$this->load->helper('url');
     }
 	public function index(){
-		redirect('Appoint/Icon');
+		redirect('Appoint/Index');
 	}
 }

@@ -7,7 +7,7 @@ class Welcome extends Curd{
 	    $this->load->helper('url');
 	    $this->load->library('session');
 		if(!$this->session->userdata('user_id')){
-			redirect('Appoint/Icon');exit;
+			redirect('Appoint/Index');exit;
 		}
 	    $login_info = $this->session->userdata();
 
@@ -46,7 +46,7 @@ class Welcome extends Curd{
             return $this->load->view('/welcome/index', ['list' => $list]);
         }else{
             $this->load->helper('url');
-            redirect('/Appoint/Icon');
+            redirect('/Appoint/Index');
         }
 	}
 	public function welcome2(){

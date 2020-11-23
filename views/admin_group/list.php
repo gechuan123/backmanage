@@ -6,7 +6,7 @@
 </div>
 <div class="x-body">
 	<xblock>
-		<button class="layui-btn" onclick='x_admin_show("icon","<?=base_url()?>Appoint/Icon")'>
+		<button class="layui-btn" onclick='x_admin_show("icon","<?=base_url()?>Appoint/Index")'>
 			<i class="layui-icon layui-icon-search"></i>查看更多icon
 		</button>
 	</xblock>

@@ -31,7 +31,7 @@
                 <dd><a onclick='x_admin_show("編集","/AdminUser/edit?id=1")'>編集</a></dd>
             </dl>
         </li>
-        <li class="layui-nav-item to-index"><a href="<?php echo base_url()?>Appoint/Icon" target="_blank" >予約【ホーム】</a></li>
+        <li class="layui-nav-item to-index"><a href="<?php echo base_url()?>Appoint/Index" target="_blank" >予約【ホーム】</a></li>
     </ul>
 
 </div>
