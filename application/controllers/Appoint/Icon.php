@@ -1,0 +1,151 @@
+<?php
+defined('BASEPATH') OR exit('No direct script access allowed');
+include_once './application/libraries/Appoint.php';
+class Icon extends Appoint
+{
+    public function __construct()
+    {
+        parent::__construct();
+    }
+    public function index()
+    {
+        $this->load->view('appoint/index');
+    }
+    public function ajaxCheckEmail_ManageUser()
+    {
+        $data = [];
+        $data = $_POST;
+        if(!empty($data['id'])){
+            $where['id <>'] = $data['id'];  
+        }
+        $where['email'] = $data['email'];
+        if($this->db->where($where)->count_all_results('ci_manage_user') != 0){
+            exit("1");
+        }else{
+            exit("0");
+        }
+    }
+    public function ajaxCheckMobile_ManageUser()
+    {
+        $data = [];
+        $data = $_POST;
+        if(!empty($data['id'])){
+            $where['id <>'] = $data['id'];  
+        }
+        $where['mobile'] = $data['mobile'];
+        if($this->db->where($where)->count_all_results('ci_manage_user') != 0){
+            exit("1");
+        }else{
+            exit("0");
+        }
+    }
+    public function ajaxCheckVehicleplate_ManageVehicle()
+    {
+        $data = [];
+        $data = $_POST;
+        if(!empty($data['id'])){
+            $where['id <>'] = $data['id'];  
+        }
+        $where['vehicleplate'] = $data['vehicleplate'];
+        if($this->db->where($where)->count_all_results('ci_manage_vehicle') != 0){
+            exit("1");
+        }else{
+            exit("0");
+        }
+    }
+    public function dealthumb($path)
+    {
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $path;
+        $config['create_thumb'] = TRUE;
+        //生成的缩略图将在保持纵横比例 在宽度和高度上接近所设定的width和height
+        $config['maintain_ratio'] = TRUE;
+        $config['width'] = 80;
+        $config['height'] = 80;
+        $this->load->library('image_lib', $config);
+        $this->image_lib->resize();
+        $this->image_lib->clear();
+    }
+    public function overlay($path,$imgpath)
+    {
+        $this->load->library('image_lib');
+        $newname = time().'_over.jpg';
+        //设置新图像名称
+        $config['new_image'] =$imgpath.$newname;
+        //调用php gd库 绘图
+        $config['image_library'] = 'gd2';
+        //源图像 本地地址
+        $config['source_image'] = $path;
+        //覆盖文字
+        $config['wm_text'] = 'Copyright 2015 - Friker';
+        //覆盖类型 文字/图像
+        $config['wm_type'] = 'text';
+        //文字字体类型
+        //$config['wm_font_path'] = 'C:\Windows\Fonts\vrinda.ttf';
+        //字体大小
+        $config['wm_font_size'] = '16';
+        //字体颜色
+        $config['wm_font_color'] = 'ff0000';
+        //垂直方向距离顶端距离
+        $config['wm_vrt_alignment'] = '20';
+        //水平方向距离左端距离
+        $config['wm_hor_alignment'] = 'center';
+        //padding
+        $config['wm_padding'] = '20';
+        $this->image_lib->initialize($config);
+        if($this->image_lib->watermark()){
+          $this->image_lib->clear();
+          return $config['new_image'];
+        }else{
+          $this->image_lib->clear();
+          return '';
+        }
+    }
+    public function ajaxUpImage()
+    {
+        $this->load->helper('url');
+        $formpic = key($_FILES);
+        //文件处理部分
+        if(false === empty($_FILES[$formpic]['tmp_name'])){
+            //设置文件上传的路径
+            $upload['upload_path'] = "./appoint/vehicle/";
+            //限制文件上传的类型
+            $upload['allowed_types'] = 'jpeg|jpg|gif|png';
+            //限制文件上传的大小
+            $upload['max_size'] = 2048;
+            //设置文件上传的路径
+            $upload['file_name'] = date('YmdHis', time()).rand(10000, 99999);
+            //加载文件上传配置信息
+            $this->load->library('upload', $upload);
+            //处理文件上传
+            $this->upload->do_upload($formpic);
+            //返回文件上传信息
+            $image = $this->upload->data();
+            //var_dump($image);exit;
+            //返回文件上传名字
+            $data = $image['file_name'];
+            $this->dealthumb($image['full_path']);
+            $this->overlay($image['full_path'],$image['file_path']);
+            $thumbdata = '';
+            //生成缩略图名称
+            $pos = strripos($image['file_name'], ".");
+            $newname = substr($image['file_name'], 0,$pos)."_thumb".substr($image['file_name'], $pos);
+            if(file_exists($image['file_path'].$newname)){
+                $thumbdata = $newname;
+            }
+        }
+        //$dirroot = $_SERVER['DOCUMENT_ROOT'];
+        //$this->dealthumb($dirroot."/public/img/".$data);
+        //上传失败
+        if(!$data){
+            echo json_encode(array('status'=>0,'msg'=>"上传失败！"));
+        }else{
+            //上传成功
+            echo json_encode(array(
+                'name'=>$data,
+                'pic'=>base_url()."appoint/vehicle/".$data,
+                'picthumb'=>$thumbdata == '' ?$data:$thumbdata
+            ));
+        }
+    }
+}

@@ -1,0 +1,413 @@
+$common:#2e98e5;
+@media (max-width: 1500px) {
+    .table-3 table {
+        td:first-child {
+            width: 25%;
+        }
+        td:last-child {
+            width: 75%;
+        }
+    }
+}
+
+@media (max-width: 1300px) {
+    .hero-box {
+        left: 5%;
+        p {
+            text-shadow: 1px 1px 1px #fff;
+        }
+    }
+    header ul li a {
+        padding: 0 25px;
+    }
+    .table-3 table {
+        td:first-child {
+            width: 30%;
+        }
+        td:last-child {
+            width: 70%;
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    header {
+        position: fixed;
+        width: 100%;
+        background: #fff;
+        z-index: 10;
+        box-shadow: 0 10px 16px rgba(0, 0, 0, 0.05);
+        ul {
+            display: none;
+        }
+    }
+    .hero,
+    .pages {
+        margin-top: 82px;
+    }
+    .toggle-btn {
+        display: block;
+    }
+    .ghost-nav {
+        display: flex;
+    }
+    .contact {
+        margin-right: 65px;
+    }
+    .company p {
+        font-size: 20px;
+    }
+    .content {
+        display: block;
+        .sidebar {
+            margin-right: 0;
+        }
+    }
+    .order-history {
+        margin-top: 50px;
+    }
+    .table-3 {
+        margin-top: 30px;
+        table {
+            td:first-child {
+                width: 25%;
+            }
+            td:last-child {
+                width: 75%;
+            }
+        }
+    }
+}
+
+@media (max-width: 900px) {
+    .table-3 {
+        table {
+            td:first-child {
+                width: 30%;
+            }
+            td:last-child {
+                width: 70%;
+            }
+        }
+    }
+    .table-4 table th {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 850px) {
+    .table-2 {
+        th,
+        td {
+            text-align: left;
+        }
+        th {
+            font-size: 13px;
+            padding: 10px;
+        }
+        td:first-child {
+            max-width: 71px;
+            word-wrap: break-word; //white-space:nowrap 
+        }
+        td:nth-child(2) {
+            min-width: 70px;
+        }
+        td:nth-child(3) {
+            min-width: 55px;
+        }
+        td:nth-child(4) {
+            min-width: 50px;
+        }
+        td:nth-child(5) {
+            min-width: 59px;
+        }
+        td:nth-child(6) {
+            min-width: 34px;
+        }
+        td {
+            padding: 10px 5px;
+        }
+    }
+}
+
+@media (max-width: 750px) {
+    header {
+        .logo {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        .contact {
+            margin-right: 53px;
+            a {
+                i {
+                    font-size: 20px;
+                    padding-bottom: 0;
+                }
+                span {
+                    display: none;
+                }
+            }
+            .letter {
+                padding: 18px;
+            }
+        }
+    }
+    .toggle-btn {
+        top: 13px;
+        right: 13px;
+    }
+    .hero {
+        height: 550px;
+        margin-top: 56px;
+    }
+    .pages {
+        margin-top: 56px;
+    }
+    .hero-box {
+        left: 0;
+        padding: 0 15px;
+        h2 {
+            font-size: 24px;
+            span {
+                margin-right: 5px;
+                padding: 3px 5px;
+            }
+        }
+        p {
+            font-size: 14px;
+            padding-top: 20px;
+        }
+    }
+    .company {
+        margin: 40px auto;
+        padding: 40px 20px;
+        p {
+            font-size: 14px;
+        }
+    }
+    .more {
+        max-width: 140px;
+        padding: 5px 10px;
+        margin: 30px auto 0;
+    }
+    .news {
+        padding: 40px 0;
+        ul {
+            margin-top: 30px;
+            li {
+                font-size: 14px;
+                span {
+                    min-width: 100px;
+                }
+            }
+        }
+    }
+    .title {
+        h3 {
+            font-size: 20px;
+            &:before {
+                left: -48px;
+            }
+            &:after {
+                right: -48px;
+            }
+        }
+    }
+    footer {
+        padding: 15px;
+    }
+    .pagetop a {
+        bottom: 50px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        line-height: 1;
+        i {
+            font-size: 20px
+        }
+    }
+    .pages {
+        h2 {
+            font-size: 24px;
+        }
+        span {
+            font-size: 14px;
+        }
+    }
+    .mainpage {
+        margin: 40px auto;
+    }
+    .breadcrumbs {
+        padding-bottom: 30px;
+    }
+    .table-1 {
+        padding: 20px;
+        table {
+            td:first-child {
+                padding: 10px;
+                font-size: 14px;
+                min-width: 170px;
+            }
+            td:last-child input {
+                padding: 10px;
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+        }
+        .submit {
+            max-width: 150px;
+            margin: 25px auto 0;
+            input {
+                font-size: 14px;
+                padding: 10px 0;
+            }
+        }
+        .member-tit {
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+    }
+    .table-3 {
+        .submit {
+            max-width: 150px;
+            margin: 25px auto 0;
+            input {
+                font-size: 14px;
+                padding: 10px 0;
+            }
+        }
+        table {
+            td:first-child {
+                padding: 10px 10px 0;
+                font-size: 14px;
+                min-width: 150px;
+                width: 22%;
+            }
+            td:last-child {
+                width: 78%;
+                input {
+                    padding: 10px;
+                    margin: 10px 10px 0;
+                    width: calc(100% - 20px);
+                }
+            }
+            tr:last-child td {
+                padding-bottom: 10px;
+            }
+        }
+    }
+    .tab-login {
+        padding: 0;
+    }
+    .pages {
+        padding: 50px 0;
+    }
+    .content {
+        .sidebar {
+            height: 413px;
+            ul li a,
+            h3 {
+                padding: 15px;
+            }
+            ul li a {
+                font-size: 14px;
+            }
+            h3 {
+                font-size: 16px;
+            }
+        }
+    }
+    .order-history {
+        margin: 50px auto 0;
+    }
+    .order-box {
+        table {
+            th {
+                padding: 10px;
+            }
+            td {
+                padding: 10px;
+            }
+        }
+        .order-content {
+            padding: 15px 15px 0;
+        }
+    }
+    .table-4 {
+        padding: 15px 20px 0;
+        table th {
+            padding: 10px;
+            font-size: 14px;
+        }
+    }
+    .table-4 table td input {
+        margin: 10px;
+        width: calc(100% - 20px);
+    }
+    .estimates-tit {
+        padding-bottom: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .order-box table {
+        th,
+        td {
+            font-size: 12px;
+            min-width: 60px;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .hero-box h2 {
+        font-size: 22px;
+    }
+    .table-2 th {
+        font-size: 12px;
+        padding: 10px 5px;
+    }
+    .table-1 table {
+        td {
+            border-bottom: none;
+        }
+        td:first-child {
+            display: block;
+            border-right: 1px solid #e4e4e4;
+            width: 100%;
+            min-width: 100%;
+        }
+        td:last-child {
+            display: block;
+            width: 100%;
+        }
+        tr:last-child {
+            td:last-child {
+                border-bottom: 1px solid #e4e4e4;
+            }
+        }
+    }
+    .table-3 table {
+        td:first-child {
+            display: block;
+            width: 100%;
+            min-width: 100%;
+        }
+        tr:last-child td {
+            padding-bottom: 0;
+        }
+        tr:last-child td:last-child {
+            padding-bottom: 10px;
+        }
+        td:last-child {
+            display: block;
+            width: 100%;
+            input {
+                margin: 5px 10px 0;
+            }
+        }
+    }
+    .table-4 table th {
+        font-size: 13px;
+    }
+}
