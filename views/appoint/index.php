@@ -68,7 +68,7 @@
 					
 					</ul>
 				</div>
-				<?php foreach($data['typeinfo'] as $key => $val){?>
+				<?php }?>
 			</div>
 		</div>
 	</div>
