@@ -9,7 +9,18 @@ class Index extends Appoint
     }
 	public function Index()
     {
-		$data = [];
+        $data = [];
+        $typewhere['isdelete'] = '0';
+        $typewhere['status'] = '1';
+        $data['typeinfo'] = $this->db->where($typewhere)->get('ci_manage_vehicle_type')->result_array();
+        foreach($data['typeinfo'] as $key => $val)
+        {
+            $vehiclewhere['isdelete'] = '0';
+            $vehiclewhere['status'] = '1';
+            $vehiclewhere['type_id'] = $val['id'];
+            $data['typeinfo'][$key]['vehicleinfo'] = $this->db->where($vehiclewhere)->get('ci_manage_vehicle')->result_array();
+        }
+        // print_r($data);
 	    $this->load->view('appoint/index', $data);
     }
 }
