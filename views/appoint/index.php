@@ -51,7 +51,6 @@
 		</div>
 		<div class="layui-fluid">
 			<div class="layui-card">
-				<?php foreach($data['typeinfo'] as $key => $val){?>
 				<div class="layui-card-header" style="text-align: center;font-size:25px;" id="layui">
 					暖色 暖色 
 				</div>
@@ -68,7 +67,6 @@
 					
 					</ul>
 				</div>
-				<?php }?>
 			</div>
 		</div>
 	</div>
