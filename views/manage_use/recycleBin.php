@@ -64,11 +64,10 @@
 						<label for="color" class="col-sm-2 control-label">色を選ぶ</label>
 						<div class="col-sm-10">
 							<select name="color" class="form-control" id="color">
-							<option value="">色を選ぶ</option>
 							<option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
 							<option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
 							<option style="color:#008000;" value="#008000">&#9724; Green</option>
-							<option style="color:#FFD700;" value="#FFD700">&#9724; Yellow</option>
+							<option style="color:#FFD700;" value="#FFD700" selected>&#9724; Yellow</option>
 							<option style="color:#FF8C00;" value="#FF8C00">&#9724; Orange</option>
 							<option style="color:#FF0000;" value="#FF0000">&#9724; Red</option>
 							<option style="color:#CCCCCC;" value="#CCCCCC">&#9724; gray</option>
@@ -121,7 +120,6 @@
 						<label for="color" class="col-sm-2 control-label">色を選ぶ</label>
 						<div class="col-sm-10">
 							<select name="color" class="form-control" id="color">
-								<option value="">色を選ぶ</option>
 								<option style="color:#0071c5;" value="#0071c5">&#9724; Dark blue</option>
 								<option style="color:#40E0D0;" value="#40E0D0">&#9724; Turquoise</option>
 								<option style="color:#008000;" value="#008000">&#9724; Green</option>						  
@@ -241,8 +239,8 @@
 					id: '<?php echo $event['id']; ?>',
 					title: '<?php echo $event['title']; ?>',
 					vehicle_id: '<?php echo $event['vehicle_id']; ?>',
-					start: '<?php echo $event['start']; ?>',
-					end: '<?php echo $event['end']; ?>',
+					start: '<?php echo $event['start_time']; ?>',
+					end: '<?php echo $event['end_time']; ?>',
 					color: '<?php echo $event['color']; ?>',
 					is_set_x: '<?php echo $event['is_set_x']; ?>',
 				},

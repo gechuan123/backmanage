@@ -54,10 +54,13 @@ body {
 <body>
 <div class="x-body">
     <form class="layui-form" action="javascript:void(0);" id="form">
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+			<legend>情報の設定</legend>
+		</fieldset>
 		<div class="layui-form-item">
             <label class="layui-form-label">メールボックス：</label>
             <div class="layui-input-block">
-                <input type="text" name="email" lay-verify="email|db_email" placeholder="入力されていません。!" autocomplete="off" class="layui-input">
+                <input type="text" name="email" id="email" lay-verify="email|db_email" placeholder="入力されていません。!" autocomplete="off" class="layui-input">
             </div>
         </div>
 		
@@ -74,7 +77,7 @@ body {
             </div>
         </div>
 		
-		<div class="layui-form-item" id="class_1" style="display:none">
+		<div class="layui-form-item" id="class_1" style="display:">
             <label class="layui-form-label">重機選択：</label>
             <div class="layui-input-block">
 				<?php foreach($type_list as $key => $val){?>
@@ -82,46 +85,28 @@ body {
 				<?php }?>
             </div>
         </div>
-		<div class="layui-form-item" id="class_2" style="display:none">
+		<div class="layui-form-item" id="class_2" style="display:">
             <label class="layui-form-label">車両選択：</label>
             <div class="layui-input-block">
 				<ul class="layui-tree" id="vehicle">
 				</ul>
             </div>
         </div>
-		<div class="layui-form-item" id="class_3" style="display:none">
-            <label class="layui-form-label">時間の設定：</label>
-            <div class="layui-input-block">
-				<input type="text" readonly name="set_time" lay-verify="set_time" placeholder="車両開始時間" autocomplete="off" class="layui-input" onclick="s_admin_show('開始時間の設定', '<?php echo base_url()?>ManageUse/recycleBin',800,700)" value="">
-            </div>
-        </div>
-        <div class="layui-form-item" id="class_4" style="display:none">
-            <label class="layui-form-label">ソート：</label>
-            <div class="layui-input-block">
-                <input type="text" name="sort" placeholder="" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item" id="class_5" style="display:none">
-            <label class="layui-form-label">状態：</label>
-            <div class="layui-input-block">
-                <input type="radio" name="status" value="1" title="有効" checked>
-                <input type="radio" name="status" value="0" title="無効">
-            </div>
-        </div>
-        <div class="layui-form-item layui-form-text" id="class_6" style="display:none">
-            <label class="layui-form-label">コメント：</label>
-            <div class="layui-input-block">
-                <textarea name="remark" placeholder="" class="layui-textarea"></textarea>
-            </div>
-        </div>
+		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+			<legend>時間の設定</legend>
+		</fieldset>
         <div class="layui-form-item">
             <div class="layui-input-block" style="text-align:center">
 				<input type="hidden" name="user_id" id="user_id">
-                <button class="layui-btn" lay-submit lay-filter="add">送信</button>
-                <button type="reset" class="layui-btn layui-btn-primary">リセット</button>
+                <button class="layui-btn" lay-submit lay-filter="add">時間の設定</button>
             </div>
         </div>
     </form>
+</div>
+<div style="display:none;" id="show">
+	<div class="layui-progress layui-progress-big" lay-filter="demo" lay-showPercent="true">
+		<div class="layui-progress-bar" lay-percent="0%"></div>
+	</div>
 </div>
 <script>
 
@@ -173,13 +158,8 @@ layui.use(['form','layer','laydate'], function(){
 		,range: '~~~'
 		,format: 'yyyy-MM-dd HH:mm:ss'
 	}); 
-	
+
     form.verify({
-        set_time:function(value){
-            if(value.length <= 0){
-                return '開始時間の設定 入力されていません。!';
-            }
-        },
 		otherReq:function(value,item){
 			var $ = layui.$;
 			var verifyName=$(item).attr('name')
@@ -210,16 +190,6 @@ layui.use(['form','layer','laydate'], function(){
 						ischeck = 'Email 存在しない！';
 						$("#class_realname").hide();
 						$("#class_mobile").hide();
-						
-						$("#class_1").hide();
-						$("#class_2").hide();
-						$("#class_3").hide();
-						$("#class_4").hide();
-						$("#class_5").hide();
-						$("#class_6").hide();
-						
-						
-						
 			    	}else{
 						var jsonArray = jQuery.parseJSON(result);
 						$("#class_realname").show();
@@ -227,14 +197,6 @@ layui.use(['form','layer','laydate'], function(){
 						$("#realname").val(jsonArray.realname);
 						$("#mobile").val(jsonArray.mobile);
 						$("#user_id").val(jsonArray.id);
-						
-						$("#class_1").show();
-						$("#class_2").show();
-						$("#class_3").show();
-						$("#class_4").show();
-						$("#class_5").show();
-						$("#class_6").show();
-						
 						return ischeck;
 					}
 				},
@@ -247,31 +209,32 @@ layui.use(['form','layer','laydate'], function(){
 
     form.on('submit(add)', function(data){
 
-		var vehicle_radio = $('input[name="vehicle_radio"]:checked').val();
-		var type_radio = $('input[name="type_radio"]:checked').val();
+		s_admin_show('開始時間の設定', '<?php echo base_url()?>ManageUse/recycleBin',800,700);
 		
-		var index = layer.confirm('よろしいですか？', {icon: 3, title:'荻原建設',btn: ['確定', 'キャンセル']}, function(){
+		// var vehicle_radio = $('input[name="vehicle_radio"]:checked').val();
+		// var type_radio = $('input[name="type_radio"]:checked').val();
+		// var index = layer.confirm('よろしいですか？', {icon: 3, title:'荻原建設',btn: ['確定', 'キャンセル']}, function(){
 
-			$.ajax({
-				url : "<?php echo current_url(); ?>",
-				type: 'POST',
-				data: {vehicle_type_ids:type_radio,vehicle_ids:vehicle_radio,user_id:data.field.user_id,set_time:data.field.set_time,email:data.field.email,mobile:data.field.mobile,sort:data.field.sort,remark:data.field.remark,status:data.field.status},
-				dataType: 'JSON',
-				success: function(ret){
-					var icon = 200 == ret.ret? 6: 5;
-					if(200 == ret.ret){
-						var index = parent.layer.getFrameIndex(window.name);
-						parent.layer.close(index);
-					}else{
-						layer.close(layer.index);
-					}
-				},
-				error: function(err) {
-					layer.msg('送信に失敗');
-				}
-			});
-			return false;
-		}); 
+			// $.ajax({
+				// url : "<?php echo current_url(); ?>",
+				// type: 'POST',
+				// data: {vehicle_type_ids:type_radio,vehicle_ids:vehicle_radio,user_id:data.field.user_id,set_time:data.field.set_time,email:data.field.email,mobile:data.field.mobile,sort:data.field.sort,remark:data.field.remark,status:data.field.status},
+				// dataType: 'JSON',
+				// success: function(ret){
+					// var icon = 200 == ret.ret? 6: 5;
+					// if(200 == ret.ret){
+						// var index = parent.layer.getFrameIndex(window.name);
+						// parent.layer.close(index);
+					// }else{
+						// layer.close(layer.index);
+					// }
+				// },
+				// error: function(err) {
+					// layer.msg('送信に失敗');
+				// }
+			// });
+			// return false;
+		// }); 
     });
 	
 	$(function(){

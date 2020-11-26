@@ -9,20 +9,84 @@ class ManageUse extends Curd
     }
     protected $controller = 'manage_use';
     protected $model = 'AGModel';
-    protected $table = 'manage_use';
+    protected $table = 'manage_vehicle_user';
     protected $limit = 10 ;
     protected $field = ['realname','password','email','mobile'];
     protected $returnMsg = ['会員名','密码','メールボックス','電話番号'];
 
     public function index()
 	{
-        $this->db->where(['isdelete' => '0']);
-        $this->db->where(['vehicle_id' => $_GET['vehicle_id']]);
-        $data['set_info'] = $this->db->get('ci_manage_vehicle_user')->result_array();
-        if(!empty($_GET['vehicle_id'])){
-            $data['vehicle_id'] = $_GET['vehicle_id'];
+        $this->load->library('session');
+		if(!$this->session->userdata('user_id')){
+			redirect('Pub/login');exit;
         }
-        return $this->load->view($this->controller . '/list', $data);
+        
+        $data = $_GET;
+        $post = $_POST;
+        $this->db->select();
+        /*search-form-inline sta*///////////////////////////////////////////////////
+
+        if(!empty($post['search_realname'])){   
+            $user_id = $this->db->where(['realname'=>$post['search_realname']])->get('ci_manage_user')->row_array();
+            if(!empty($user_id['id'])){
+                $this->db->where(['user_id'=>$user_id['id']]);
+            }
+        }
+        if(!empty($post['search_email'])){
+            $email = $this->db->where(['email'=>$post['search_email']])->get('ci_manage_user')->row_array();
+            if(!empty($email['id'])){
+                $this->db->where(['user_id'=>$email['id']]);
+            }
+        }
+        if(!empty($post['search_vehiclename'])){
+            $vehicle_id = $this->db->where(['vehiclename'=>$post['search_vehiclename']])->get('ci_manage_vehicle')->row_array();
+            if(!empty($vehicle_id['id'])){
+                $this->db->where(['vehicle_id'=>$vehicle_id['id']]);
+            }
+        }
+        if(!empty($post['search_vehicleplate'])){
+            $vehicleplate = $this->db->where(['vehicleplate'=>$post['search_vehicleplate']])->get('ci_manage_vehicle')->row_array();
+            if(!empty($vehicleplate['id'])){
+                $this->db->where(['vehicle_id'=>$vehicleplate['id']]);
+            }
+        }
+        
+        /*search-form-inline end*///////////////////////////////////////////////////
+        $this->db->where(['isdelete' => '0']);
+        $this->db->order_by('sort','asc');
+        if(isset($data['name'])){
+            $this->db->where(['name' => $data['name']]);
+            $param = "&name=" . $data['name'];
+        }else{
+            $param = '';
+        }
+        $data['p'] = isset($data['p']) ? $data['p'] : 1;
+        $this->load->helper('list');
+        $result = paginate($this, $this->table, $this->limit, $data['p'], true, $param);
+        foreach($result['list'] as $key => $val)
+        {
+            $result['list'][$key]['realname'] = $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array()['realname'];
+            $result['list'][$key]['email'] = $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array()['email'];
+            $result['list'][$key]['vehiclename'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehiclename'];
+            $result['list'][$key]['vehicleplate'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehicleplate'];
+            $result['list'][$key]['vehicleimage'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehicleimage'];
+        }
+        /*search-form-inline sta*/////////////////////////////////////////////////////
+        if(!empty($post['search_realname']))
+		{
+            $result['search_realname'] = $post['search_realname'];
+        }
+        if(!empty($post['search_email'])){
+            $result['search_email'] = $post['search_email'];
+        }
+        if(!empty($post['search_vehiclename'])){
+            $result['search_vehiclename'] = $post['search_vehiclename'];
+        }
+        if(!empty($post['search_vehicleplate'])){
+            $result['search_vehicleplate'] = $post['search_vehicleplate'];
+        }
+        /*search-form-inline end*/////////////////////////////////////////////////////
+        return $this->load->view($this->controller . '/list', $result);
     }
     public function recycleBin()
 	{
@@ -129,13 +193,6 @@ class ManageUse extends Curd
                 $where['isdelete'] = "0";
                 $where['status'] = "1";
                 $vehicle_data['type_list'][$key]['vehicle_list'] = $this->db->where($where)->order_by('create_time','DESC')->get('ci_manage_vehicle')->result_array();
-            }
-
-            if(!empty($_GET['str_ymd']) && !empty($_GET['str_his'])){
-                $vehicle_data['s_time'] = $_GET['str_ymd'].' '.$_GET['str_his'];
-            }
-            if(!empty($_GET['end_ymd']) && !empty($_GET['end_his'])){
-                $vehicle_data['e_time'] = $_GET['end_ymd'].' '.$_GET['end_his'];
             }
             return $this->load->view($this->controller . '/add', $vehicle_data);
         }
