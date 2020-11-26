@@ -44,4 +44,5 @@ class Appoint extends CI_Controller
         // if (!success($res))
             // $this->show_redirect($res);
     }
+
 }

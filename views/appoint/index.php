@@ -43,34 +43,143 @@
 		<h2>予約時間を選択</h2>
 		<span>Please select a reservation time</span>
 	</div>
-	<div class="mainpage inner">
-	<div class="table-1">
-		<div class="member-tit">
-			予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？<br>
-			予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？予約？<br>
-		</div>
-		<div class="layui-fluid">
-			<div class="layui-card">
-				<div class="layui-card-header" style="text-align: center;font-size:25px;" id="layui">
-					暖色 暖色 
-				</div>
-				<div class="layui-card-body">
-					<ul class="site-doc-icon">
-					
-						<li>
-							<img src="<?php echo base_url()?>appoint/vehicle/2020112014404336384.jpg" class="layui-upload-img">
-							<div class="name">ビーワイディー</div>
-							<div class="layui-right">
-								123
+	<div class="mainpage inner" >
+		<div class="table-1">
+				<div class="layui-tab layui-tab-card" lay-filter="demo">
+				<ul class="layui-tab-title">
+					<?php foreach($typeinfo as $k=>$v) {?>
+					<li <?php if($k==0){?>class="layui-this"<?php }?>><?php echo $v['typename'];?></li>
+					<?php }?>
+				</ul>
+				
+					<div class="layui-tab-content">
+							<?php foreach($carinfo as $k=>$v) {?>
+							<?php if($k==0){?>
+							<div class="layui-tab-item layui-show">
+							<?php }else{?>
+							<div class="layui-tab-item">
+							<?php }?>
+								<div class="layui-fluid">
+									<div class="layui-card">
+
+										<div class="layui-card-body" style="width:100%">
+											<ul class="site-doc-icon"  style="width:100%">
+												<?php foreach($v as $key=>$value) {?>
+												
+												<li style="margin-left:6%">
+													<img src="<?php echo base_url().'/appoint/vehicle/'.$value['vehicleimage'] ?>" class="layui-upload-img">
+													<div class="name"><?php echo $value['vehiclename']?></div>
+													<div class="layui-right">
+														<?php echo $value['vehicleplate']?>
+													</div>
+													<a href="javascript:void(0)"  onclick="appointment(<?php echo $value['id']?>)"  class="layui-btn">すぐ予約します</a>
+												</li>
+												
+												<?php }?>
+											</ul>
+										</div>
+								    </div>
+								</div>  
 							</div>
-						</li>
-					
-					</ul>
+							<?php }?>
+					</div>
 				</div>
-			</div>
 		</div>
 	</div>
-</div>
+
+
 <script type="text/javascript">
+layui.use(['layer', 'form','element'], function() {
+			var layer = layui.layer,
+			$ = layui.jquery,
+			form = layui.form,
+			element = layui.element;
+
+			window.appointment = function(id) {
+				$.ajax({
+					type: "POST",
+					url: '/Appoint/initialize/validation',
+					dataType: 'json',
+					async: true,
+					success: function (data) {
+						if(data.status=="fail"){
+
+							layer.msg(data.msg,{time: 1000}, function(){
+									layer.open({
+										type: 2
+										,title: '登録してください'
+										,content: ['/Appoint/login','no']
+										,maxmin: true
+										,area: ['25%', '27%']
+										,btn: ['ログイン', 'キャンセル']
+										,yes: function(index, layero){
+											
+												var field=$(layero).find('iframe')[0].contentWindow.callbackdata();
+												$.ajax({
+												type: "POST",
+												url: "/Appoint/login/check",
+												dataType: 'json',
+												async: true,
+												data: field,
+												success: function (data) {
+													if(data.status=="successful"){
+														layer.msg(data.msg,{time: 1000}, function(){
+															window.location.reload()
+														});
+														//layer.msg(data.successful);
+													}else{
+														
+														layer.msg(data.msg, {icon: 5,shift : 6});
+									
+													}
+												}
+											});
+										}
+									}); 
+								});
+							//layer.msg(data.successful);
+						}else{
+						
+						   layer.open({
+								type: 2
+								,title: '予約車両'
+								,content: '/Appoint/appointment/index?id='+id
+								,maxmin: true
+								,area: ['90%', '95%']
+								,btn: ['確認', 'キャンセル']
+								,yes: function(index, layero){
+
+										var field=$(layero).find('iframe')[0].contentWindow.callbackdata();
+										console.log(layero);
+										$.ajax({
+											type: "POST",
+											url: "/Appoint/appointment/save",
+											dataType: 'json',
+											async: true,
+											data: field,
+											success: function (data) {
+												if(data.status=="successful"){
+													layer.msg(data.msg,{time: 1000}, function(){
+														window.location.reload()
+													});
+													//layer.msg(data.successful);
+												}else{
+													
+													layer.msg(data.msg, {icon: 5,shift : 6});
+								
+												}
+											}
+										});
+								}
+							}); 
+
+						}
+					}
+				});
+
+			}
+
+});
+
 </script>
 <?php $this->load->view('appoint/footer');?>

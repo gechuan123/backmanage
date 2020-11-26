@@ -1,41 +1,35 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 include_once './application/libraries/Appoint.php';
-class Index extends Appoint
+class Appointment extends Appoint
 {
-    public function __construct()
-    {
-        parent::__construct();
-    }
+
 	public function Index()
     {
+  
+        $params = $_GET;
+        $user_info = $this->db->where(['id'=>$this->session->id])->get('ci_manage_user')->row_array();
         
+        $this->db->from('ci_manage_vehicle_user')->where('ci_manage_vehicle_user.vehicle_id', $params['id']);
+        $vehicle_user_info =$this->db->join('ci_manage_user', 'ci_manage_vehicle_user.user_id = ci_manage_user.id')->get()->result_array();
 
-        $data = [];
-        $typewhere['isdelete'] = '0';
-        $typewhere['status'] = '1';
-        $data['typeinfo'] = $this->db->where($typewhere)->get('ci_manage_vehicle_type')->result_array();
-        foreach($data['typeinfo'] as $key => $val)
-        {
-            $vehiclewhere['isdelete'] = '0';
-            $vehiclewhere['status'] = '1';
-            $vehiclewhere['type_id'] = $val['id'];
-            $data['carinfo'][] = $this->db->where($vehiclewhere)->get('ci_manage_vehicle')->result_array();
+
+        
+        $vehicle_arr = [];
+        foreach($vehicle_user_info as $k=>$v){
+               $vehicle_arr[$k]['title'] = '予約者:'.$v['realname'];
+               $start_time = explode(" ",$v['start_time']);
+               $end_time = explode(" ",$v['end_time']);
+               $vehicle_arr[$k]['start'] = $start_time[0].'T'.$start_time[1];
+               $vehicle_arr[$k]['end'] = $end_time[0].'T'.$end_time[1];
+               $vehicle_arr[$k]['className'] = 'red';
         }
 
-	    $this->load->view('appoint/index', $data);
+        $this->load->view('appoint/appointment',['id'=>$params['id'],'user_info'=>$user_info,'vehicle_arr'=>json_encode($vehicle_arr)]);
     }
 
 
-    public function appointment(){
-
-        $params = $_GET;
-
-
-        $this->load->view('appoint/appointment',['id'=>$params['id']]);
-    }
-
-    public function appointment_save(){
+    public function save(){
         $params = $_POST;
 
         $this->load->helper('request');
@@ -67,4 +61,7 @@ class Index extends Appoint
 
         die(CallbackMessage(true,'予約が成功したら、後で管理者の審査を待ってください!'));
     }
+
+
+
 }

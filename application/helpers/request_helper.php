@@ -65,3 +65,46 @@ if(!function_exists('regMatch_user')){
         return ['status' => true];
     }
 }
+if(!function_exists('verify_email')){
+        function verify_email($email=''){
+                $pattern = '/^\w{3,}@([a-z]{2,7}|[0-9]{3})\.(com|cn)$/';
+             
+                $result = preg_match_all($pattern, $email, $matches);
+                
+                if(!$result){
+                     return false;
+                }
+                return true;
+        }
+}
+if(!function_exists('verify_mobile')){
+        function verify_mobile($mobile=''){
+                $pattern = '/^[a-z0-9._%-]+@([a-z0-9-]+\.)+[a-z]{2,4}$|^1[3|4|5|7|8]\d{9}$/';
+             
+                $result = preg_match_all($pattern, $mobile, $matches);
+                
+                if(!$result){
+                     return false;
+                }
+                return true;
+        }
+}
+if(!function_exists('verify_number')){
+        function verify_number($str=''){
+                $len = mb_strlen($str,"utf-8");
+             
+                if($len<4||$len>16){
+                    return false;
+                }
+
+                return true;
+        }
+}
+if(!function_exists('CallbackMessage')){
+    function  CallbackMessage($code=false,$msg=''){
+    if($code){
+            return json_encode(['status' => 'successful', 'msg' =>$msg]);
+    }
+    return json_encode(['status' => 'fail', 'msg' =>$msg]);
+    }
+}

@@ -17,11 +17,15 @@ class Login extends Appoint
 
         $params = [];
         $params = $_POST;
-
+        
 
         $this->load->helper('request');
-        if(!verify_email($params['email'])){
+        if(!verify_email($params['email'])||empty($params['email'])){
             die(CallbackMessage(false,'メールボックスは合法ではない!'));
+        }
+
+        if(empty($params['password'])){
+            die(CallbackMessage(false,'暗証番号が正しくない!'));
         }
         $user_arr = $this->db->where(['email'=>$params['email']])->get('ci_manage_user')->row_array();
 
@@ -39,48 +43,66 @@ class Login extends Appoint
  
         $this->load->library('session');
 
-        $_SESSION['user_info'] = $user_arr;
+        $_SESSION['id'] = $user_arr['id'];
+        $_SESSION['name'] = $user_arr['realname'];
         die(CallbackMessage(true,'ログイン成功!'));
     }
-    public function ajaxCheckMobile_ManageUser()
-    {
-        $data = [];
-        $data = $_POST;
-        if(!empty($data['id'])){
-            $where['id <>'] = $data['id'];  
+    public function login_out(){
+        $this->load->library('session');
+
+        if(!$this->session->unset_userdata('id')){
+            die(CallbackMessage(true,'ログアウト成功!'));
         }
-        $where['mobile'] = $data['mobile'];
-        if($this->db->where($where)->count_all_results('ci_manage_user') != 0){
-            exit("1");
-        }else{
-            exit("0");
-        }
-    }
-    public function ajaxCheckVehicleplate_ManageVehicle()
-    {
-        $data = [];
-        $data = $_POST;
-        if(!empty($data['id'])){
-            $where['id <>'] = $data['id'];  
-        }
-        $where['vehicleplate'] = $data['vehicleplate'];
-        if($this->db->where($where)->count_all_results('ci_manage_vehicle') != 0){
-            exit("1");
-        }else{
-            exit("0");
-        }
+        die(CallbackMessage(false,'ログアウト失敗!'));
     }
 
-    // public function ajaxCheckPubAccount()
-    // {
-    //     $data = [];
-    //     $data = $_POST;
-    //     if($this->db->where('account', $data['account'])->count_all_results('ci_admin_user') != 0){
-    //         echo json_encode(array('ret'=>401,'desc'=>'アカウントを登録する已被注册'));
-    //     }else if($this->db->where('email', $data['email'])->count_all_results('ci_admin_user') != 0){
-    //         echo json_encode(array('ret'=>401,'desc'=>'メールボックス住所已被使用'));
-    //     }else if($this->db->where('mobile', $data['mobile'])->count_all_results('ci_admin_user') != 0){
-    //         echo json_encode(array('ret'=>401,'desc'=>'電話番号已被使用'));
-    //     }
-    // }
+
+    public function up_user(){
+        
+        $user_info = $this->db->where(['id'=>$this->session->id])->get('ci_manage_user')->row_array();
+
+        $this->load->view('appoint/up_user',['user_info'=>$user_info]);
+    }
+
+
+    public function save_user(){
+        $len = mb_strlen("ログアウト失敗","utf-8");
+      
+        $params = $_POST;
+
+        $user_info = $this->db->where(['id'=>$params['id']])->get('ci_manage_user')->row_array();
+        $data['id'] = $params['id'];
+        $this->load->helper('request');
+        if(empty($params['realname'])){
+            die(CallbackMessage(false,'ユーザ名は空ではありません!'));
+        }
+        if(!verify_email($params['email'])||empty($params['email'])){
+            die(CallbackMessage(false,'入力されたメールアドレスは不正です!'));
+        }
+        if(!verify_mobile($params['mobile'])||empty($params['mobile'])){
+            die(CallbackMessage(false,'入力された電話番号のフォーマットは正しくないです!'));
+        }
+        if(!verify_number($params['realname'])){
+            die(CallbackMessage(false,'ユーザー名の文字数は4桁以上で、16ビット未満でなければなりません!'));
+        }
+        $data['realname'] = $params['realname'];
+
+        $data['email'] = $params['email'];
+
+        $data['mobile'] = $params['mobile'];
+
+        if(!empty($params['password'])){
+              if(!verify_number($params['password'])){
+                   die(CallbackMessage(false,'パスワードの文字数は4桁以上で、16ビット未満でなければなりません!'));
+              }
+              $data['password'] = md5($params['password']);
+        }
+        $data['remark'] = $params['remark'];
+
+        $res = $this->db->replace('ci_manage_user',$data);
+        if(!$res){
+            die(CallbackMessage(false,'ユーザ資料の修正に失敗しました!'));
+        }
+        die(CallbackMessage(true,'ユーザー資料の修正に成功しました!'));
+    }
 }
