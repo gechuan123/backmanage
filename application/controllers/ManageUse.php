@@ -16,94 +16,103 @@ class ManageUse extends Curd
 
     public function index()
 	{
-        $this->load->library('session');
-		if(!$this->session->userdata('user_id')){
-			redirect('Pub/login');exit;
-		}
-        $data = $_GET;
-        $post = $_POST;
-        $this->db->select();
-
-        /*search-form-inline sta*///////////////////////////////////////////////////
-        if(!empty($post['search_realname']))
-		{
-            $this->db->like('realname', $post['search_realname'], 'both');
-        }
-        if(!empty($post['search_mobile']))
-		{
-            $this->db->like('mobile', $post['search_mobile'], 'both');
-        }
-        if(!empty($post['search_start_end']))
-		{
-			$tim = [];
-			$tim = $post['search_start_end'];
-            $tim = explode(" - ", $tim);
-            $stime = strtotime($tim[0]);
-            $etime = strtotime($tim[1]);
-			$this->db->where('create_time >=', $stime);
-            $this->db->where('create_time <=', $etime);
-        }
-        
-        if(!empty($post['search_status']) && $post['search_status'] != '-1')
-        {
-            if($post['search_status'] == '1'){
-                $this->db->where(['status' => '1']);
-            }else{
-                $this->db->where(['status' => '0']);
-            }
-        }
-        /*search-form-inline end*/////////////////////////////////////////////////////////
-
         $this->db->where(['isdelete' => '0']);
-        $this->db->order_by('sort','asc');
-        if(isset($data['name'])){
-            $this->db->where(['name' => $data['name']]);
-            $param = "&name=" . $data['name'];
-        }else{
-            $param = '';
+        $this->db->where(['vehicle_id' => $_GET['vehicle_id']]);
+        $data['set_info'] = $this->db->get('ci_manage_vehicle_user')->result_array();
+        if(!empty($_GET['vehicle_id'])){
+            $data['vehicle_id'] = $_GET['vehicle_id'];
         }
-        $data['p'] = isset($data['p']) ? $data['p'] : 1;
-        $this->load->helper('list');
-        $result = paginate($this, $this->table, $this->limit, $data['p'], true, $param);
-        //echo $this->db->last_query();exit;
-        /*search-form-inline sta*///////////////////////////////////////////////////////////
-        if(!empty($post['search_realname']))
-		{
-            $result['search_realname'] = $post['search_realname'];
+        return $this->load->view($this->controller . '/list', $data);
+    }
+    public function recycleBin()
+	{
+        $this->db->where(['isdelete' => '0']);
+        $this->db->where(['vehicle_id' => $_GET['vehicle_id']]);
+        $data['set_info'] = $this->db->get('ci_manage_vehicle_user')->result_array();
+        if(!empty($_GET['vehicle_id'])){
+            $data['vehicle_info'] = $this->db->where(['id'=>$_GET['vehicle_id']])->get('ci_manage_vehicle')->row_array();
         }
-        if(!empty($post['search_mobile']))
-		{
-            $result['search_mobile'] = $post['search_mobile'];
+        if(!empty($_GET['user_id'])){
+            $data['user_info'] = $this->db->where(['id'=>$_GET['user_id']])->get('ci_manage_user')->row_array();
         }
-        if(!empty($post['search_start_end']))
-		{
-			$tim = [];
-			$tim = $post['search_start_end'];
-            $tim = explode(" - ", $tim);
-            $result['search_start_end'] = $tim[0].' - '.$tim[1];
-        }
-        if(!empty($post['search_status']) && $post['search_status'] != '-1')
-        {
-            if($post['search_status'] == '1'){
-                $result['search_status'] = '1';
-            }else{
-                $result['search_status'] = '2';
+        return $this->load->view($this->controller . '/recycleBin', $data);
+    }
+    public function recycle()
+	{
+        if(!empty($_GET['str'])){
+            if(!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])$/", $_GET['str'])){
+                return ajax_return_json_error($this, 'error');
             }
+            if(strtotime(date('Y-m',time())) >= strtotime($_GET['str'])){
+                return ajax_return_json_error($this, 'error');
+            }
+            $get = $_GET;
+            $data['nowdate'] = $_GET['str'];
+        }else{
+            $data['nowdate'] = date('Y-m', mktime(null,null,null,date('m',strtotime(date('Y-m',time())))+1,1,date('Y',strtotime(date('Y-m',time())))));
         }
-        /*search-form-inline end*////////////////////////////////////////////////////////////
-        return $this->load->view($this->controller . '/list', $result);
+
+        //初始化日期
+        $data['nextdate'] = date('Y-m', mktime(null,null,null,date('m',strtotime($data['nowdate']))+1,1,date('Y',strtotime($data['nowdate']))));
+        $data['year'] = date('Y',strtotime($data['nowdate']));
+        $data['month'] = date('m',strtotime($data['nowdate']));
+        $data['first_day_week'] = date('w', mktime(null,null,null,$data['month'],1,$data['year']));
+        $data['prev_moth'] = date('Y-m', mktime(null,null,null,$data['month']-1,1,$data['year']));
+        $data['next_moth'] = date('Y-m', mktime(null,null,null,$data['month']+1,1,$data['year']));
+        $data['week'] = ['日曜日','月曜日','火曜日','水曜日','木曜日','金曜日','土曜日'];
+        $data['days'] = date('t',strtotime($data['nowdate']));
+        $data['nowber'] = date('d');
+        $this->db->like('ymd', $data['nowdate'], 'both');
+        $this->db->order_by('create_time','desc');
+        $week_info = $this->db->order_by('ymd','asc')->get('ci_manage_date')->result_array();
+        for($i=1; $i<=$data['days']; $i++){
+            $data['year_moth_day'][$i]['ymd'] = strftime("%Y-%m-%d", strtotime($data['nowdate']."-".$i));
+            $data['year_moth_day'][$i]['week'] = date("w",strtotime($data['nowdate']."-".$i));
+            $data['year_moth_day'][$i]['weekstr'] = $data['week'][date("w",strtotime($data['nowdate']."-".$i))];
+
+            $insert[$i]['ymd'] = strftime("%Y-%m-%d", strtotime($data['nowdate']."-".$i));
+            $insert[$i]['week'] = date("w",strtotime($data['nowdate']."-".$i));
+            $insert[$i]['weekstr'] = $data['week'][date("w",strtotime($data['nowdate']."-".$i))];
+            $insert[$i]['is_work'] = 1;
+            $insert[$i]['create_time'] = time();
+            $this->db->insert('ci_manage_date', $insert[$i]); 
+        }
+        //初始化分类车辆
+        $vehicle_where = [];
+        $vehicle_where['isdelete'] = "0";
+        $vehicle_where['status'] = "1";
+        $data['type_list'] = $this->db->where($vehicle_where)->order_by('create_time','DESC')->get('ci_manage_vehicle_type')->result_array();
+        foreach($data['type_list'] as $key => $val){
+            $where = [];
+            $where['type_id'] = $val['id'];
+            $where['isdelete'] = "0";
+            $where['status'] = "1";
+            $data['type_list'][$key]['vehicle_list'] = $this->db->where($where)->order_by('create_time','DESC')->get('ci_manage_vehicle')->result_array();
+        }
+        if(!empty($_GET['vid'])){
+            $data['vehicle_info'] = $this->db->where(['id'=>$_GET['vid']])->get('ci_manage_vehicle')->row_array();
+        }
+        return $this->load->view($this->controller . '/recycle', $data);
 	}
     public function add()
     {
-        if(IS_POST){
-            $data = [];
-            $data = $_POST;
-            $data['password_str'] = $data['password'];
-            $data['password'] = md5($data['password']);
+        $this->load->library('session');
+        if(!$this->session->userdata('user_id')){
+            redirect('Pub/login');exit;
+        }
+
+        $post = $_POST;
+        if($post){
+            $start_end =  explode("~~~",$post['start_end']);
+            $data['user_id'] = $post['user_id'];
+            $data['vehicle_type_ids'] = $post['vehicle_type_ids'];
+            $data['vehicle_ids'] = $post['vehicle_ids'];
+            $data['start_time'] = $start_end[0];
+            $data['end_time '] = $start_end[1];
+            $data['sort'] = $post['sort'];
+            $data['remark'] = $post['remark'];
+            $data['status'] = $post['status'];
             $data['create_time'] = time();
-            $data['last_login_ip'] =  $_SERVER["SERVER_ADDR"];
-            $data['last_login_time'] = time();
-            
             if($this->db->insert($this->table, $data)){
                 die(json_encode(array('ret'=>200,'desc'=>'送信成功')));
             }
@@ -121,37 +130,57 @@ class ManageUse extends Curd
                 $where['status'] = "1";
                 $vehicle_data['type_list'][$key]['vehicle_list'] = $this->db->where($where)->order_by('create_time','DESC')->get('ci_manage_vehicle')->result_array();
             }
+
+            if(!empty($_GET['str_ymd']) && !empty($_GET['str_his'])){
+                $vehicle_data['s_time'] = $_GET['str_ymd'].' '.$_GET['str_his'];
+            }
+            if(!empty($_GET['end_ymd']) && !empty($_GET['end_his'])){
+                $vehicle_data['e_time'] = $_GET['end_ymd'].' '.$_GET['end_his'];
+            }
             return $this->load->view($this->controller . '/add', $vehicle_data);
         }
     }
     public function edit()
     {
         if(IS_POST){
-            $data = [];
-            $data = $_POST;
-            $id = $data['id'];
-            unset($data['id']);
-            if(!empty($data['password'])){
-                $data['password_str'] = $data['password'];
-                $data['password'] = md5($data['password']);
-            }else{
-                unset($data['password']);
-            }
+            $post = $_POST;
+            $start_end =  explode("~~~",$post['start_end']);
+            $data['user_id'] = $post['user_id'];
+            $data['vehicle_type_ids'] = $post['vehicle_type_ids'];
+            $data['vehicle_ids'] = $post['vehicle_ids'];
+            $data['start_time'] = $start_end[0];
+            $data['end_time '] = $start_end[1];
+            $data['sort'] = $post['sort'];
+            $data['remark'] = $post['remark'];
+            $data['status'] = $post['status'];
             $data['update_time'] = time();
-            $data['last_login_ip'] =  $_SERVER["SERVER_ADDR"];
-            $data['last_login_time'] = time();
 
-            $this->db->where('id', $id);
-            $result = $this->db->update($this->table, $data);
+            $result = $this->db->where(['id'=>$post['id']])->update($this->table, $data);
             if($result){
                 die(json_encode(array('ret'=>200,'desc'=>'保存に成功')));
             }
             echo json_encode(array('ret'=>401,'desc'=>'保存に失敗'));
         }else{
+
+            $vehicle_where = [];
+            $vehicle_where['isdelete'] = "0";
+            $vehicle_where['status'] = "1";
+            $vehicle_data = [];
+            $vehicle_data['type_list'] = $this->db->where($vehicle_where)->order_by('create_time','DESC')->get('ci_manage_vehicle_type')->result_array();
+            foreach($vehicle_data['type_list'] as $key => $val){
+                $where = [];
+                $where['type_id'] = $val['id'];
+                $where['isdelete'] = "0";
+                $where['status'] = "1";
+                $vehicle_data['type_list'][$key]['vehicle_list'] = $this->db->where($where)->order_by('create_time','DESC')->get('ci_manage_vehicle')->result_array();
+            }
+
             $id = $_GET['id'];
-            $this->db->where('id', $id);
-            $info = $this->db->get($this->table)->row_array();
-            $this->load->view($this->controller . '/edit', $info);
+            $vehicle_data['info'] = $this->db->where(['id'=>$id])->get($this->table)->row_array();
+            $vehicle_data['info']['email'] = $this->db->where(['id'=>$vehicle_data['info']['user_id']])->get('ci_manage_user')->row_array()['email'];
+            $vehicle_data['info']['realname'] = $this->db->where(['id'=>$vehicle_data['info']['user_id']])->get('ci_manage_user')->row_array()['realname'];
+            $vehicle_data['info']['mobile'] = $this->db->where(['id'=>$vehicle_data['info']['user_id']])->get('ci_manage_user')->row_array()['mobile'];
+            return $this->load->view($this->controller . '/edit', $vehicle_data);
         }
     }
 }

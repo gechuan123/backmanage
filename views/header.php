@@ -16,4 +16,5 @@
     <script type="text/javascript" src="js/xadmin.js"></script>
     <script type="text/javascript" src="js/common.js"></script>
     <script type="text/javascript" src="js/curd.js"></script>
+
 </head>
