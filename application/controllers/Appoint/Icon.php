@@ -25,6 +25,20 @@ class Icon extends Appoint
             exit("0");
         }
     }
+    public function ajaxCheckEmail_ManageUser_is()
+    {
+        if($_POST){
+            $data = $_POST;
+            $result = $this->db->select('id,realname,email,mobile')->where('email', $data['email'])->get('ci_manage_user')->row_array();
+            if(!empty($result)){
+                exit(json_encode($result));
+            }else{
+                exit("0");
+            }
+        }else{
+            exit("0");
+        }
+    }
     public function ajaxCheckMobile_ManageUser()
     {
         $data = [];
@@ -146,6 +160,83 @@ class Icon extends Appoint
                 'pic'=>base_url()."appoint/vehicle/".$data,
                 'picthumb'=>$thumbdata == '' ?$data:$thumbdata
             ));
+        }
+    }
+    public function ajaxTypeVehicle()
+    {
+        if($_POST){
+            $data = $_POST;
+            $result = $this->db->select('*')->where('type_id', $data['type_id'])->get('ci_manage_vehicle')->result_array();
+            if(count($result) > 0){
+                exit(json_encode($result));
+            }else{
+                exit("0");
+            }
+        }else{
+            exit("0");
+        }
+    }
+
+    public function editEventDate()
+	{
+        if(isset($_POST['Event'][0]) && isset($_POST['Event'][1]) && isset($_POST['Event'][2])){
+            $id = $_POST['Event'][0];
+            $start = $_POST['Event'][1];
+            $end = $_POST['Event'][2];
+            $res = $this->db->where('id', $id)->update('ci_manage_vehicle_user', ['start_time'=>$start,'end_time'=>$end]);
+            if($res == false){
+                die ('Erreur execute');
+            }else{
+                die ('OK');
+            }
+        }
+    }
+    public function addEventDate()
+    {
+        if (isset($_POST['title']) && isset($_POST['vehicle_id']) && isset($_POST['user_id']) && isset($_POST['start']) && isset($_POST['end']) && isset($_POST['color'])){
+			$data['title'] = $_POST['title'];
+            $data['vehicle_id'] = $_POST['vehicle_id'];
+            $data['user_id'] = $_POST['user_id'];
+            $data['start_time'] = $_POST['start'];
+            $data['end_time'] = $_POST['end'];
+            $data['color'] = $_POST['color'];
+            $res = $this->db->insert('ci_manage_vehicle_user', $data);
+            if($res == false){
+                die ('追加に失敗');
+            }else{
+
+                $user_id = $_POST['user_id'];
+                $vehicle_id = $_POST['vehicle_id'];
+                redirect('/ManageUse/recycleBin?vehicle_id='.$vehicle_id.'&user_id='.$user_id);
+            }
+        }
+    }
+    public function delEventDate()
+    {
+        if(isset($_POST['delete']) && isset($_POST['id']))
+        {
+            $id = $_POST['id'];
+            $res = $this->db->delete('ci_manage_vehicle_user', ['id'=>$id]);
+            if($res == false){
+                die ('削除に失敗');
+            }else{
+                $user_id = $_POST['user_id'];
+                $vehicle_id = $_POST['vehicle_id'];
+                redirect('/ManageUse/recycleBin?vehicle_id='.$vehicle_id.'&user_id='.$user_id);
+            }
+        }
+        elseif(isset($_POST['color']) && isset($_POST['id']))
+        {
+            $id = $_POST['id'];
+            $color = $_POST['color'];
+            $res = $this->db->where('id', $id)->update('ci_manage_vehicle_user', ['color'=>$color]);
+            if($res == false){
+                die ('変更に失敗');
+            }else{
+                $user_id = $_POST['user_id'];
+                $vehicle_id = $_POST['vehicle_id'];
+                redirect('/ManageUse/recycleBin?vehicle_id='.$vehicle_id.'&user_id='.$user_id);
+            }
         }
     }
 }
