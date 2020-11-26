@@ -145,7 +145,7 @@ layui.use(['layer', 'form','element'], function() {
 								,title: '予約車両'
 								,content: '/Appoint/appointment/index?id='+id
 								,maxmin: true
-								,area: ['90%', '95%']
+								,area: ['50%', '90%']
 								,btn: ['確認', 'キャンセル']
 								,yes: function(index, layero){
 

@@ -1,9 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Appointment
+class Appointmentverify
 {
     public function __construct()
     {
+    
         $this->MYCI = &get_instance();
        //$this->MYCI->db=$this->load->database();
         $this->MYCI->db=$this->MYCI->load->database('default', TRUE);
@@ -16,7 +17,7 @@ class Appointment
         $condition_start["start_time between '$start_time' and '$end_time'"]=null;
 
         $condition_end["end_time between '$start_time' and '$end_time'"]=null;
-        
+
         $vehicle_user_info = $this->MYCI->db    
         ->where('vehicle_id', $vehicle_id)
         ->group_start()
@@ -26,7 +27,9 @@ class Appointment
        
         ->group_end()
         ->get('ci_manage_vehicle_user')->result_array();
-    
-        return $vehicle_user_info;
+        if(!empty($vehicle_user_info)){
+            return false;
+        }
+        return true;
     }
 }

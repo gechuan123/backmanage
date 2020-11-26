@@ -9,20 +9,44 @@ class Appointment extends Appoint
   
         $params = $_GET;
         $user_info = $this->db->where(['id'=>$this->session->id])->get('ci_manage_user')->row_array();
-        
-        $this->db->from('ci_manage_vehicle_user')->where('ci_manage_vehicle_user.vehicle_id', $params['id']);
+        if(isset($params['id'])){
+            $id = $params['id'];
+            $info = 'ci_manage_vehicle_user.vehicle_id';
+        }else{
+            $id = $this->session->id;
+            $info = 'ci_manage_vehicle_user.user_id';
+            $params['id'] = 0;
+        }
+        $this->db->from('ci_manage_vehicle_user')->where($info, $id);
+        $this->db->join('ci_manage_vehicle', 'ci_manage_vehicle_user.vehicle_id = ci_manage_vehicle.id');
         $vehicle_user_info =$this->db->join('ci_manage_user', 'ci_manage_vehicle_user.user_id = ci_manage_user.id')->get()->result_array();
 
 
-        
+        // echo "<pre>";
+        // var_dump($vehicle_user_info);
+        // die;
         $vehicle_arr = [];
         foreach($vehicle_user_info as $k=>$v){
-               $vehicle_arr[$k]['title'] = '予約者:'.$v['realname'];
+               //$vehicle_arr[$k]['title'] = '予約者:'.$v['realname'].'--車を予約する:'.$v['vehiclename'].'(車のナンバープレート:'.$v['vehicleplate'].')';
                $start_time = explode(" ",$v['start_time']);
                $end_time = explode(" ",$v['end_time']);
                $vehicle_arr[$k]['start'] = $start_time[0].'T'.$start_time[1];
                $vehicle_arr[$k]['end'] = $end_time[0].'T'.$end_time[1];
-               $vehicle_arr[$k]['className'] = 'red';
+               if(!$params['id']){
+                   $vehicle_arr[$k]['title'] = '車を予約する:'.$v['vehiclename'].'(車のナンバープレート:'.$v['vehicleplate'].')';
+                   $vehicle_arr[$k]['className'] = 'green';
+               }else{
+                   if($v['user_id']==$this->session->id){
+                       $vehicle_arr[$k]['title'] = 'あなたの予約';
+                       $vehicle_arr[$k]['className'] = 'green';
+                   }else{
+                       $vehicle_arr[$k]['title'] = '予約があります';
+                       $vehicle_arr[$k]['className'] = 'red';
+                   }
+                   
+               }
+
+               
         }
 
         $this->load->view('appoint/appointment',['id'=>$params['id'],'user_info'=>$user_info,'vehicle_arr'=>json_encode($vehicle_arr)]);
@@ -33,7 +57,8 @@ class Appointment extends Appoint
         $params = $_POST;
 
         $this->load->helper('request');
-        $data['user_id'] = 0;
+        $this->load->library('Appointmentverify');
+        $data['user_id'] = $this->session->id;
 
         $data['vehicle_id'] = $params['id'];
 
@@ -45,6 +70,11 @@ class Appointment extends Appoint
         }
         if($params['end_time']<$params['start_time']){
             die(CallbackMessage(false,'使用終了時間は、使用開始時間より短くてはならない!'));
+        }
+        $AppointVerify = $this->appointmentverify->restrictions($params['id'],$params['start_time'],$params['end_time']);
+
+        if(!$AppointVerify){
+            die(CallbackMessage(false,'予約した時間が他の人と衝突しました。再設定してください!'));
         }
         $data['start_time'] = $params['start_time'];
         $data['end_time'] = $params['end_time'];

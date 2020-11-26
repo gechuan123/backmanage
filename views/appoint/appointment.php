@@ -35,6 +35,7 @@
                 </div>
             </div>
         </fieldset>
+        <?php if($id){?>
         <fieldset class="layui-elem-field site-demo-button" style="margin-top: 15px;">
         <legend>予約情報</legend>
             <div class="layui-form-item">
@@ -62,9 +63,10 @@
         </div>
         <input type="hidden" name="id" value="<?php echo $id?>">
     </fieldset>
+    <?php }?>
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 15px;">
         <legend>予約の詳細</legend>
-    <div class="main">
+    <div class="main" style="margin-left:30px;margin-right:30px">
 		
 	    <div id="calendar1"></div>
 	</div>
@@ -116,11 +118,11 @@
         timeFormat: 'HH:mm', //日程事件的时间格式
         //      timeFormat: 'HH:mm{ - H:mm}',{agenda: ‘h:mm{ - h:mm}}
         buttonText: { //各按钮的显示文本信息
-            today: '今天',
+            today: '今日/今週',
             month: '月',
-            agendaWeek: '周',
+            agendaWeek: '週間',
             agendaDay: '日',
-            listMonth: '日程',
+            listMonth: 'スケジュール',
         },
         //      columnFormat: {
         //       month: 'dddd',
@@ -132,10 +134,10 @@
         //       week: "[yyyy年] MMMM月d日 { '―' [yyyy年] MMMM月d日}",
         //       day: 'yyyy年 MMMM月d日 dddd',
         //   },
-        monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], //月份全称
-        monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"], //月份简写
-        dayNames: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"], //周全称
-        dayNamesShort: ["周日", "周一", "周二", "周三", "周四", "周五", "周六"], //周简写
+        monthNames: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],   
+        monthNamesShort: ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],   
+        dayNames: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],   
+        dayNamesShort: ["日曜日", "月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日"],   
         noEventsMessage: "当月无数据", //listview视图下，无数据提示
         allDayText: "全天", //自定义全天视图的名称
         allDaySlot: false, //是否在周日历上方显示全天
@@ -150,7 +152,7 @@
         weekMode: 'fixed', //月视图里显示周的模式，因每月周数不同月视图高度不定。fixed：固定显示6周高，日历高度保持不变liquid：不固定周数，高度随周数变化variable：不固定周数，但高度固定
         weekNumbers: false, //是否在日历中显示周次(一年中的第几周)，如果设置为true，则会在月视图的左侧、周视图和日视图的左上角显示周数。
         weekNumberCalculation: 'iso', //周次的显示格式。
-        height: 800, //设置日历的高度，包括header日历头部，默认未设置，高度根据aspectRatio值自适应。
+        height: 680, //设置日历的高度，包括header日历头部，默认未设置，高度根据aspectRatio值自适应。
         //      contentHeight: 600,//设置日历主体内容的高度，不包括header部分，默认未设置，高度根据aspectRatio值自适应。
         handleWindowResize: true, //是否随浏览器窗口大小变化而自动变化。
         defaultView: 'month', //初始化时默认视图，默认是月month，agendaWeek是周，agendaDay是当天

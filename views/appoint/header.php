@@ -54,10 +54,13 @@
 			</a>
 		</div>
 		<?php if(isset($_SESSION['id'])){?>
-		 <div class="site-text" style="float: right;margin-right:15%;margin-top:-31px">
-				 <a href="javascript:void(0)"  id="up_user">こんにちは,<?php echo $_SESSION['name']?></a>
+		 <div class="site-text" style="float: right;margin-right:15%;margin-top:-51px">
+				 <a href="javascript:void(0)"  id="up_user">個人情報</a>
 		</div>
-		<div class="site-text" style="float: right;margin-right:0%;margin-top:-40px">
+		 <div class="site-text" style="float: right;margin-right:15%;margin-top:-19px">
+				 <a href="javascript:void(0)"  id="appointment_info">私の予約情報</a>
+		</div>
+		<div class="site-text" style="float: right;margin-right:-24%;margin-top:-40px">
 				<button type="button" id="log_out" class="layui-btn layui-btn-radius layui-btn-danger">ログアウト</button>
 		</div>  
 		<?php }else{?>
@@ -140,6 +143,18 @@ layui.use(['layer', 'form','element'], function() {
 							}
 						}
 					});
+				}
+			}); 	
+		});
+		$(document).on('click',"#appointment_info",function(){
+			layer.open({
+				type: 2
+				,title: 'ユーザー情報の更新'
+				,content: '/Appoint/Appointment/Index'
+				,maxmin: true
+				,area: ['60%', '75%']
+				,btn: ['キャンセル']
+				,btn2: function(index, layero){
 				}
 			}); 	
 		});
