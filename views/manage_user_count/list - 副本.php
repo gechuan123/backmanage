@@ -52,62 +52,86 @@ body {
 }
 </style>
 <body>
-<div class="x-body">
-    <form class="layui-form" action="javascript:void(0);" id="form">
-		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-			<legend>情報の設定</legend>
-		</fieldset>
-		<div class="layui-form-item">
-            <label class="layui-form-label">メールボックス：</label>
-            <div class="layui-input-block">
-                <input type="text" name="email" id="email" lay-verify="email|db_email" placeholder="入力されていません。!" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-		
-		<div class="layui-form-item" id="class_realname" style="display:none">
-            <label class="layui-form-label">会員名：</label>
-            <div class="layui-input-block">
-                <input type="text" disabled id="realname" placeholder=""  autocomplete="off" class="layui-input">
-            </div>
-        </div>
-		<div class="layui-form-item" id="class_mobile" style="display:none">
-            <label class="layui-form-label">電話番号：</label>
-            <div class="layui-input-block">
-                <input type="text" disabled id="mobile" placeholder=""  autocomplete="off" class="layui-input">
-            </div>
-        </div>
-		
-		<div class="layui-form-item" id="class_1" style="display:">
-            <label class="layui-form-label">重機選択：</label>
-            <div class="layui-input-block">
-				<?php foreach($type_list as $key => $val){?>
-					<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>" <?php if($val['id']==1){?>checked<?php }?>>
-				<?php }?>
-            </div>
-        </div>
-		<div class="layui-form-item" id="class_2" style="display:">
-            <label class="layui-form-label">車両選択：</label>
-            <div class="layui-input-block">
-				<ul class="layui-tree" id="vehicle">
-				</ul>
-            </div>
-        </div>
-		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-			<legend>時間の設定</legend>
-		</fieldset>
-        <div class="layui-form-item">
-            <div class="layui-input-block" style="text-align:center">
-				<input type="hidden" name="user_id" id="user_id">
-                <button class="layui-btn" lay-submit lay-filter="add">時間の設定</button>
-            </div>
-        </div>
-    </form>
+<div class="x-nav">
+    <span class="layui-breadcrumb"><a href="javascript:;">人員管理</a><a href="javascript:;">情報統計</a></span>
+	<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="更新"><i class="layui-icon" style="line-height:30px">更新</i></a>
 </div>
+<div class="x-body">
+
+<div style="line-height:4.2em;text-align:center" >
+</div>
+	<form class="layui-form" action="javascript:void();">
+    <table class="layui-table">
+        <tbody>
+            <tr>
+                <td>
+                    <table class="layui-table">
+                        <thead>
+							<th class="list-center" >日付</th>
+                            <th class="list-center" >5時</th>
+                            <th class="list-center" >6時</th>
+							<th class="list-center" >7時</th>
+                            <th class="list-center" >8時</th>
+							<th class="list-center" >9時</th>
+							<th class="list-center" >10時</th>
+							<th class="list-center" >11時</th>
+							<th class="list-center" >12時</th>
+							<th class="list-center" >13時</th>
+							<th class="list-center" >14時</th>
+							<th class="list-center" >15時</th>
+							<th class="list-center" >16時</th>
+							<th class="list-center" >17時</th>
+							<th class="list-center" >18時</th>
+							<th class="list-center" >19時</th>
+							<th class="list-center" >20時</th>
+							<th class="list-center" >21時</th>
+							<th class="list-center" >22時</th>
+							<th class="list-center" >23時</th>
+							<th class="list-center" >24時</th> 	 						
+                        </thead>
+                        <tbody>
+
+                            <tr>
+								<td class="list-center">O</td>
+                                <td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+                                <td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								<td class="list-center">O</td>
+								
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+			
+        </tbody>
+    </table>
+	</form>
+</div>
+
 <div style="display:none;" id="show">
 	<div class="layui-progress layui-progress-big" lay-filter="demo" lay-showPercent="true">
 		<div class="layui-progress-bar" lay-percent="0%"></div>
 	</div>
 </div>
+
 <script>
 
 function s_admin_show(title,url,w,h){
@@ -143,8 +167,6 @@ function s_admin_show(title,url,w,h){
     });
 }
 
-
-
 layui.use(['form','layer','laydate'], function(){
 	
 	var form = layui.form;
@@ -158,54 +180,6 @@ layui.use(['form','layer','laydate'], function(){
 		,range: '~~~'
 		,format: 'yyyy-MM-dd HH:mm:ss'
 	}); 
-
-    form.verify({
-		otherReq:function(value,item){
-			var $ = layui.$;
-			var verifyName=$(item).attr('name')
-			, verifyType=$(item).attr('type')
-			,formElem=$(item).parents('.layui-form')
-			,verifyElem=formElem.find('input[name='+verifyName+']')
-			,isTrue= verifyElem.is(':checked')
-			,focusElem = verifyElem.next().find('i.layui-icon');
-			if(!isTrue || !value){
-				focusElem.css(verifyType=='radio'?{"color":"#FF5722"}:{"border-color":"#FF5722"});
-				focusElem.first().attr("tabIndex","1").css("outline","0").blur(function(){
-					focusElem.css(verifyType=='radio'?{"color":""}:{"border-color":""});
-				}).focus();
-				return '車両選択';
-			}
-		},
-		email:[/^[a-z0-9._%-]+@([a-z0-9-]+\.)+[a-z]{2,4}$|^1[3|4|5|7|8]\d{9}$/, 'メールアドレスの形式が不正です'],
-		db_email:function(value, item)
-		{
-			var ischeck = '';
-			$.ajax({
-				url: "<?php echo base_url()?>Appoint/Icon/ajaxCheckEmail_ManageUser_is",
-				type: "POST",
-				data: {email: $('input[name=email]').val()},
-				async: false,
-				success: function(result){
-					if(result == '0'){
-						ischeck = 'Email 存在しない！';
-						$("#class_realname").hide();
-						$("#class_mobile").hide();
-			    	}else{
-						var jsonArray = jQuery.parseJSON(result);
-						$("#class_realname").show();
-						$("#class_mobile").show();
-						$("#realname").val(jsonArray.realname);
-						$("#mobile").val(jsonArray.mobile);
-						$("#user_id").val(jsonArray.id);
-						return ischeck;
-					}
-				},
-				error: function(){
-				}
-			});
-			return ischeck;
-	    },
-    });
 
     form.on('submit(add)', function(data){
 
@@ -281,6 +255,8 @@ layui.use(['form','layer','laydate'], function(){
 				
 				for(var i=0;i<jsonArray.length;i++){
 					
+					console.log(jsonArray[i]['vehicleimage']);
+					
 					html += "<li>"+"<img src='<?php echo base_url()?>appoint/vehicle/"+jsonArray[i]['vehicleimage']+"' height='100px' width='100px'>"+"<div>"+"<input type='radio' name='vehicle_radio' lay-verify='otherReq' value='"+jsonArray[i]['id']+"' title='"+jsonArray[i]['vehiclename']+"'>"+"</div>"+"</li>";
 
 				}
@@ -289,7 +265,6 @@ layui.use(['form','layer','laydate'], function(){
 			}
 		});	
    	});
-
 });
 </script>
 </body>
