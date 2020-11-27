@@ -168,7 +168,7 @@ class AdminNode extends Curd
             $data['status'] = $data['status'];
             $data['remark'] = $data['remark'];
             $data['pid']   = $data['pid'];;
-            $data['type']  = $parent['type'];
+            $data['type']  = '1';
             $data['level'] = $parent['level'];
             $data['create_time'] = time();
             if($this->db->insert('ci_admin_node', $data)){
