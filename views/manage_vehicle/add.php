@@ -32,7 +32,7 @@
             <label class="layui-form-label">画像：</label>	
 			<div class="layui-upload">
 				<button type="button" class="layui-btn" id="img">画像</button>
-				<div class="layui-input-block">
+				<div class="layui-input-block" id="image">
 					 
 					<p id="Textimage"></p>
 					<input type="hidden" name="vehicleimage" lay-verify="vehicleimage" id="vehicleimage" value="">
@@ -87,6 +87,9 @@ layui.use(['form','layer','upload'], function(){
 			if(res.code > 0){
 				return layer.msg('失敗');
 			}
+			var image = '<img src="'+res.pic+'" width="200px" height="200px">';
+
+            $('#image').html(image);
 			$('#vehicleimage').val(res.name);
 			$('#vehicleimage_thumb').val(res.picthumb);
 		}

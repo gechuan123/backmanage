@@ -92,6 +92,7 @@ layui.use(['form','layer','upload'], function(){
 			if(res.code > 0){
 				return layer.msg('失敗');
 			}
+
 			$('#vehicleimage').val(res.name);
 			$('#vehicleimage_thumb').val(res.picthumb);
 		}
