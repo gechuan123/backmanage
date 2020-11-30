@@ -84,7 +84,7 @@ layui.use(['layer', 'form','element'], function() {
 			layer.open({
 				type: 2
 				,title: '登録してください'
-				,content: ['/Appoint/login','no']
+				,content: ["<?php echo base_url() ?>Appoint/login",'no']
 				,maxmin: true
 				,area: ['25%', '27%']
 				,btn: ['ログイン', '取消']
@@ -93,7 +93,7 @@ layui.use(['layer', 'form','element'], function() {
 						var field=$(layero).find('iframe')[0].contentWindow.callbackdata();
 						$.ajax({
 						type: "POST",
-						url: "/Appoint/login/check",
+						url: "<?php echo base_url() ?>Appoint/login/check",
 						dataType: 'json',
 						async: true,
 						data: field,
@@ -117,7 +117,7 @@ layui.use(['layer', 'form','element'], function() {
 			layer.open({
 				type: 2
 				,title: 'ユーザー情報の更新'
-				,content: '/Appoint/login/up_user'
+				,content: '<?php echo base_url() ?>Appoint/login/up_user'
 				,maxmin: true
 				,area: ['25%', '60%']
 				,btn: ['確認', 'キャンセル']
@@ -126,7 +126,7 @@ layui.use(['layer', 'form','element'], function() {
 						var field=$(layero).find('iframe')[0].contentWindow.callbackdata();
 						$.ajax({
 						type: "POST",
-						url: "/Appoint/login/save_user",
+						url: "<?php echo base_url() ?>Appoint/login/save_user",
 						dataType: 'json',
 						async: true,
 						data: field,
@@ -150,7 +150,7 @@ layui.use(['layer', 'form','element'], function() {
 			layer.open({
 				type: 2
 				,title: 'ユーザー情報の更新'
-				,content: '/Appoint/Appointment/Index'
+				,content: '<?php echo base_url() ?>Appoint/Appointment/Index'
 				,maxmin: true
 				,area: ['60%', '75%']
 				,btn: ['キャンセル']
@@ -165,7 +165,7 @@ layui.use(['layer', 'form','element'], function() {
 			}, function(){
 			    	$.ajax({
 						type: "POST",
-						url: "/Appoint/login/login_out",
+						url: "<?php echo base_url() ?>Appoint/login/login_out",
 						dataType: 'json',
 						async: true,
 						success: function (data) {
