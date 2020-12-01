@@ -98,7 +98,7 @@ layui.use(['layer', 'form','element'], function() {
 			window.appointment = function(id) {
 				$.ajax({
 					type: "POST",
-					url: '/Appoint/initialize/validation',
+					url: '<?php echo base_url() ?>Appoint/initialize/validation',
 					dataType: 'json',
 					async: true,
 					success: function (data) {
@@ -108,7 +108,7 @@ layui.use(['layer', 'form','element'], function() {
 									layer.open({
 										type: 2
 										,title: '登録してください'
-										,content: ['/Appoint/login','no']
+										,content: ['<?php echo base_url() ?>Appoint/login','no']
 										,maxmin: true
 										,area: ['25%', '27%']
 										,btn: ['ログイン', 'キャンセル']
@@ -117,7 +117,7 @@ layui.use(['layer', 'form','element'], function() {
 												var field=$(layero).find('iframe')[0].contentWindow.callbackdata();
 												$.ajax({
 												type: "POST",
-												url: "/Appoint/login/check",
+												url: "<?php echo base_url() ?>Appoint/login/check",
 												dataType: 'json',
 												async: true,
 												data: field,
@@ -143,7 +143,7 @@ layui.use(['layer', 'form','element'], function() {
 						   layer.open({
 								type: 2
 								,title: '予約車両'
-								,content: '/Appoint/appointment/index?id='+id
+								,content: '<?php echo base_url() ?>Appoint/appointment/index?id='+id
 								,maxmin: true
 								,area: ['50%', '90%']
 								,btn: ['確認', 'キャンセル']
@@ -153,7 +153,7 @@ layui.use(['layer', 'form','element'], function() {
 										console.log(layero);
 										$.ajax({
 											type: "POST",
-											url: "/Appoint/appointment/save",
+											url: "<?php echo base_url() ?>Appoint/appointment/save",
 											dataType: 'json',
 											async: true,
 											data: field,
