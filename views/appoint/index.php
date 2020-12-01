@@ -38,56 +38,63 @@
     padding: 20px 20px;
     width: 100%;
 }
+.mainpage {
+    margin: 00px auto 10px;
+}
+.pages {
+    color: #1c2d5f;
+    padding: 60px 10px;
+    text-align: center;
+}
 </style>
-	<div class="pages">
-		<h2>予約時間を選択</h2>
-		<span>Please select a reservation time</span>
-	</div>
-	<div class="mainpage inner" >
-		<div class="table-1">
-				<div class="layui-tab layui-tab-card" lay-filter="demo">
-				<ul class="layui-tab-title">
-					<?php foreach($typeinfo as $k=>$v) {?>
-					<li <?php if($k==0){?>class="layui-this"<?php }?>><?php echo $v['typename'];?></li>
-					<?php }?>
-				</ul>
-				
-					<div class="layui-tab-content">
-							<?php foreach($carinfo as $k=>$v) {?>
-							<?php if($k==0){?>
-							<div class="layui-tab-item layui-show">
-							<?php }else{?>
-							<div class="layui-tab-item">
-							<?php }?>
-								<div class="layui-fluid">
-									<div class="layui-card">
+<div class="pages">
+	<h2>予約時間を選択</h2>
+	<h2>Please select a reservation time</h2>
+</div>
+<div class="mainpage inner" >
+	<div class="table-1">
+		<div class="layui-tab layui-tab-card" lay-filter="demo">
+			<ul class="layui-tab-title">
+			<?php foreach($typeinfo as $k=>$v) {?>
+			<li <?php if($k==0){?>class="layui-this"<?php }?>><?php echo $v['typename'];?></li>
+			<?php }?>
+			</ul>
 
-										<div class="layui-card-body" style="width:100%">
-											<ul class="site-doc-icon"  style="width:100%">
-												<?php foreach($v as $key=>$value) {?>
-												
-												<li style="margin-left:6%">
-													<img src="<?php echo base_url().'/appoint/vehicle/'.$value['vehicleimage'] ?>" class="layui-upload-img">
-													<div class="name"><?php echo $value['vehiclename']?></div>
-													<div class="layui-right">
-														<?php echo $value['vehicleplate']?>
-													</div>
-													<a href="javascript:void(0)"  onclick="appointment(<?php echo $value['id']?>)"  class="layui-btn">すぐ予約します</a>
-												</li>
-												
-												<?php }?>
-											</ul>
-										</div>
-								    </div>
-								</div>  
+			<div class="layui-tab-content">
+				<?php foreach($carinfo as $k=>$v) {?>
+				<?php if($k==0){?>
+				<div class="layui-tab-item layui-show">
+				<?php }else{?>
+					<div class="layui-tab-item">
+					<?php }?>
+					<div class="layui-fluid">
+					<div class="layui-card">
+
+					<div class="layui-card-body" style="width:100%">
+					<ul class="site-doc-icon"  style="width:100%">
+						<?php foreach($v as $key=>$value) {?>
+						
+						<li style="margin-left:6%">
+							<img src="<?php echo base_url().'/appoint/vehicle/'.$value['vehicleimage'] ?>" class="layui-upload-img">
+							<div class="name"><?php echo $value['vehiclename']?></div>
+							<div class="layui-right">
+								<?php echo $value['vehicleplate']?>
 							</div>
-							<?php }?>
+							<a href="javascript:void(0)"  onclick="appointment(<?php echo $value['id']?>)"  class="layui-btn">すぐ予約します</a>
+						</li>
+						
+						<?php }?>
+					</ul>
 					</div>
+					</div>
+					</div>  
+					</div>
+				<?php }?>
 				</div>
+			</div>
 		</div>
 	</div>
-
-
+</div>
 <script type="text/javascript">
 layui.use(['layer', 'form','element'], function() {
 			var layer = layui.layer,
@@ -178,8 +185,6 @@ layui.use(['layer', 'form','element'], function() {
 				});
 
 			}
-
 });
-
 </script>
 <?php $this->load->view('appoint/footer');?>

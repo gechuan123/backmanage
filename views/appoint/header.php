@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<title>予約</title>
+	<title>荻原建設|車両予約</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<link rel="apple-touch-icon-precomposed" href="<?php echo base_url() ?>appoint/img/favicon.png">
 	<link rel="shortcut icon" type="image/png" href="<?php echo base_url() ?>appoint/img/favicon.png">
@@ -47,33 +47,34 @@
 <body>
 <header>
 	<div class="header-wrap">
-		<div id="logo">
-			<a href="https://noir-omiya-aga.com/">
-				<img class="pc_aga" src="https://noir-omiya-aga.com/wp-content/uploads/2018/09/header_logo01.png" alt="予約｜予約">
-				<img class="sp_aga" src="https://noir-omiya-aga.com/wp-content/uploads/2018/10/header_logo01_aga.png" alt="予約｜予約">
-			</a>
+		<div class="header-wrap">
+			<div id="logo">
+				<a href="jsvascript:void(0)">
+					<img class="pc_aga" src="<?php echo base_url() ?>appoint/img/indexhead.png" alt="荻原建設|車両予約">
+					<img class="sp_aga" src="<?php echo base_url() ?>appoint/img/indexhead.png" alt="荻原建設|車両予約">
+				</a>
+			</div>
 		</div>
 		<?php if(isset($_SESSION['id'])){?>
-		 <div class="site-text" style="float: right;margin-right:15%;margin-top:-51px">
+		 <div class="site-text" style="float: right;margin-right:25%;margin-top:-51px">
 				 <a href="javascript:void(0)"  id="up_user">個人情報</a>
 		</div>
-		 <div class="site-text" style="float: right;margin-right:15%;margin-top:-19px">
+		 <div class="site-text" style="float: right;margin-right:25%;margin-top:-19px">
 				 <a href="javascript:void(0)"  id="appointment_info">私の予約情報</a>
 		</div>
-		<div class="site-text" style="float: right;margin-right:-24%;margin-top:-40px">
+		<div class="site-text" style="float: right;margin-right:-1%;margin-top:-40px">
 				<button type="button" id="log_out" class="layui-btn layui-btn-radius layui-btn-danger">ログアウト</button>
 		</div>  
 		<?php }else{?>
-		  <div class="site-text" style="float: right;margin-right:0%;margin-top:-40px">
+		    <div class="site-text" style="float: right;margin-right:0%;margin-top:-40px">
 				<button type="button" id="logins" class="layui-btn layui-btn-radius layui-btn-warm">ログイン</button>
-		</div>
-
+			</div>
         <?php }?>
 	</div>
 
 </header>
  <script type="text/javascript">
-layui.use(['layer', 'form','element'], function() {
+layui.use(['layer', 'form','element'], function(){
 			var layer = layui.layer,
 			$ = layui.jquery,
 			form = layui.form,
