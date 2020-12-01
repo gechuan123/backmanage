@@ -166,7 +166,7 @@ class Icon extends Appoint
     {
         if($_POST){
             $data = $_POST;
-            $result = $this->db->select('*')->where('type_id', $data['type_id'])->get('ci_manage_vehicle')->result_array();
+            $result = $this->db->select('*')->where('type_id', $data['type_id'])->order_by('id ASC')->get('ci_manage_vehicle')->result_array();
             if(count($result) > 0){
                 exit(json_encode($result));
             }else{
@@ -200,6 +200,8 @@ class Icon extends Appoint
             $data['start_time'] = $_POST['start'];
             $data['end_time'] = $_POST['end'];
             $data['color'] = $_POST['color'];
+            $data['create_time'] = time();
+            $data['is_check'] = 2;
             $res = $this->db->insert('ci_manage_vehicle_user', $data);
             if($res == false){
                 die ('追加に失敗');
@@ -237,6 +239,18 @@ class Icon extends Appoint
                 $vehicle_id = $_POST['vehicle_id'];
                 redirect('/ManageUse/recycleBin?vehicle_id='.$vehicle_id.'&user_id='.$user_id);
             }
+        }
+    }
+    public function ajaxSelectIsCheck()
+    {
+        $data = $_POST;
+        $is_check_array = [];
+        $is_check_array = explode("_",$data['is_check']);
+        $res = $this->db->where('id', $is_check_array[1])->update('ci_manage_vehicle_user', ['is_check'=>$is_check_array[0]]);
+        if($res == false){
+            die ('変更に失敗');
+        }else{
+            die ('ok');
         }
     }
 }

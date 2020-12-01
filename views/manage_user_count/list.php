@@ -55,7 +55,7 @@
 	</style>
 <body>
 <div class="x-nav">
-    <span class="layui-breadcrumb"><a href="javascript:;">人員管理</a> > <a href="javascript:;">情報統計</a></span>
+    <span class="layui-breadcrumb"><a href="javascript:;">人員管理<?=$vehicle_info["id"]?></a> > <a href="javascript:;">情報統計</a></span>
 	<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="更新"><i class="layui-icon" style="line-height:30px">更新</i></a>
 </div>
 <div class="x-body">
@@ -71,7 +71,6 @@
 						<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>">
 					<?php }?>
 					
-					
 				<?php }?>
             </div>
         </div>
@@ -86,7 +85,7 @@
 </div>
 
 <div class="x-body">
-	<p class="lead"></p>
+	<p class="lead" id="lead"></p>
 	<div id="calendar" class="col-centered"></div>
 	<div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 		<div class="modal-dialog" role="document">
@@ -200,18 +199,12 @@
 <script src='<?php echo base_url() ?>appoint/js/fullcalendar.min.js'></script>
 <script>
 
-$('input[type=radio][name=vehicle_radio]').change(function(){
-		alert(this.value);
-});
-
-
 layui.use(['form','layer','laydate'], function(){
 	var form = layui.form;
 	var layer = layui.layer;
 	var laydate = layui.laydate;
 	form.render();
 	
-	$(function(){	
 		$.ajax({
 			type:"POST",
 			url:"<?php echo base_url() ?>Appoint/Icon/ajaxTypeVehicle",
@@ -225,21 +218,19 @@ layui.use(['form','layer','laydate'], function(){
 				
 				var html = '';
 				for(var i=0;i<jsonArray.length;i++){
-
-					if(jsonArray[i]['id'] == '<?=$vehicle_info["id"]?>')
-					{
+					
+					if(jsonArray[i]['id'] == '<?=$vehicle_info["id"]?>'){
 						html += "<li style='border: 3px solid blue'>"+"<a href='<?php echo base_url()?>ManageUseCount/index?vehicle_id="+jsonArray[i]['id']+"'><img src='<?php echo base_url()?>appoint/vehicle/"+jsonArray[i]['vehicleimage']+"' height='70px' width='70px'>"+"<div>"+jsonArray[i]['vehiclename']+"</div>"+"</a></li>";
-					}
-					else
-					{
+					}else{
 						html += "<li>"+"<a href='<?php echo base_url()?>ManageUseCount/index?vehicle_id="+jsonArray[i]['id']+"'><img src='<?php echo base_url()?>appoint/vehicle/"+jsonArray[i]['vehicleimage']+"' height='70px' width='70px'>"+"<div>"+jsonArray[i]['vehiclename']+"</div>"+"</a></li>";
 					}
+
 				}
 				$("#vehicle").append(html);
 				form.render();
 			}
 		});
-	});
+
 	form.on('radio(type_radio)', function(data)
 	{
 		$.ajax({
@@ -252,8 +243,10 @@ layui.use(['form','layer','laydate'], function(){
 				var jsonArray = $.grep(result,function(value){
 					return value;
 				});
+				
 				var html = '';
 				for(var i=0;i<jsonArray.length;i++){
+					
 					if(jsonArray[i]['id'] == '<?=$vehicle_info["id"]?>')
 					{
 						html += "<li style='border: 3px solid blue'>"+"<a href='<?php echo base_url()?>ManageUseCount/index?vehicle_id="+jsonArray[i]['id']+"'><img src='<?php echo base_url()?>appoint/vehicle/"+jsonArray[i]['vehicleimage']+"' height='70px' width='70px'>"+"<div>"+jsonArray[i]['vehiclename']+"</div>"+"</a></li>";
@@ -261,6 +254,10 @@ layui.use(['form','layer','laydate'], function(){
 					else
 					{
 						html += "<li>"+"<a href='<?php echo base_url()?>ManageUseCount/index?vehicle_id="+jsonArray[i]['id']+"'><img src='<?php echo base_url()?>appoint/vehicle/"+jsonArray[i]['vehicleimage']+"' height='70px' width='70px'>"+"<div>"+jsonArray[i]['vehiclename']+"</div>"+"</a></li>";
+						
+						//$('#lead').attr("style","display:none;");
+						//$('#calendar').attr("style","display:none;");
+						
 					}
 				}
 				$("#vehicle").append(html);
@@ -285,7 +282,7 @@ layui.use(['form','layer','laydate'], function(){
 			return t;
 		}
 	}
-	var nowtime=year+'-'+(month+1);
+	var nowtime=year+'-'+month;
 	$(document).ready(function(){
 		$('#calendar').fullCalendar({
 			header:
@@ -353,7 +350,6 @@ layui.use(['form','layer','laydate'], function(){
 					start: '<?php echo $event['start_time']; ?>',
 					end: '<?php echo $event['end_time']; ?>',
 					color: '<?php echo $event['color']; ?>',
-					is_set_x: '<?php echo $event['is_set_x']; ?>',
 				},
 			<?php endforeach; ?> 
 			]

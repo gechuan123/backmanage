@@ -55,6 +55,18 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
+						<label for="title" class="col-sm-2 control-label">名前</label>
+						<div class="col-sm-10">
+							<input type="text" readonly class="form-control" value="<?=!empty($user_info['realname'])?$user_info['realname']:''?>">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="title" class="col-sm-2 control-label">重機</label>
+						<div class="col-sm-10">
+							<input type="text" readonly class="form-control" value="<?=!empty($vehicle_info['typename'])?$vehicle_info['typename']:''?>">
+						</div>
+					</div>
+					<div class="form-group">
 						<label for="title" class="col-sm-2 control-label">車名</label>
 						<div class="col-sm-10">
 							<input type="text" readonly name="title" class="form-control" value="<?=!empty($vehicle_info['vehiclename'])?$vehicle_info['vehiclename']:''?>">
@@ -109,11 +121,16 @@
 					<h4 class="modal-title" id="myModalLabel">変更</h4>
 				</div>
 				<div class="modal-body">
-
+					<div class="form-group">
+						<label for="title" class="col-sm-2 control-label">重機</label>
+						<div class="col-sm-10">
+							<input type="text" readonly class="form-control" value="<?=!empty($vehicle_info['typename'])?$vehicle_info['typename']:''?>">
+						</div>
+					</div>
 					<div class="form-group">
 						<label for="title" class="col-sm-2 control-label">車名</label>
 						<div class="col-sm-10">
-							<input type="text" name="title" class="form-control" id="title" autocomplete="off" placeholder="30文字まで" maxlength='30'>
+							<input type="text" readonly name="title" class="form-control" id="title" autocomplete="off" placeholder="30文字まで" maxlength='30'>
 						</div>
 					</div>
 					<div class="form-group">
@@ -141,7 +158,6 @@
 					<input type="hidden" name="vehicle_id" value="<?=!empty($vehicle_info['id'])?$vehicle_info['id']:''?>">
 					<input type="hidden" name="user_id" value="<?=!empty($user_info['id'])?$user_info['id']:''?>">
 					<input type="hidden" name="id" class="form-control" id="id">
-					<input type="hidden" name="is_set_x" class="form-control" id="is_set_x">
 				</div>
 				<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
@@ -172,7 +188,7 @@
 			return t;
 		}
 	}
-	var nowtime=year+'-'+(month+1);
+	var nowtime=year+'-'+month;
 	
 	$(document).ready(function()
 	{
@@ -214,7 +230,7 @@
 			{
 				
 				var start = event.start.format('YYYY-MM-DD');
-				var title = event.title.substring(0,5);
+				var title = event.title.substring(0,25);
 				var vehicle_id = event.vehicle_id;
 
 				element.bind('click', function()
@@ -242,7 +258,6 @@
 					start: '<?php echo $event['start_time']; ?>',
 					end: '<?php echo $event['end_time']; ?>',
 					color: '<?php echo $event['color']; ?>',
-					is_set_x: '<?php echo $event['is_set_x']; ?>',
 				},
 			<?php endforeach; ?> 
 			]

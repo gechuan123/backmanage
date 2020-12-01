@@ -81,7 +81,7 @@ body {
             <label class="layui-form-label">重機選択：</label>
             <div class="layui-input-block">
 				<?php foreach($type_list as $key => $val){?>
-					<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>" <?php if($val['id']==1){?>checked<?php }?>>
+					<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>" <?php if($key==0){?>checked<?php }?>>
 				<?php }?>
             </div>
         </div>
@@ -112,6 +112,7 @@ body {
 
 function s_admin_show(title,url,w,h){
 	var vehicle_radio = $('input[name="vehicle_radio"]:checked').val();
+
 	var user_id = $("#user_id").val();
 	if(!vehicle_radio){
 		return false;
@@ -159,6 +160,30 @@ layui.use(['form','layer','laydate'], function(){
 		,format: 'yyyy-MM-dd HH:mm:ss'
 	}); 
 
+	$('input[name=email]').blur(function (){
+		$.ajax({
+			url: "<?php echo base_url()?>Appoint/Icon/ajaxCheckEmail_ManageUser_is",
+			type: "POST",
+			data: {email: $('input[name=email]').val()},
+			async: false,
+			success: function(result){
+				if(result == '0'){
+					$("#class_realname").hide();
+					$("#class_mobile").hide();
+				}else{
+					var jsonArray = jQuery.parseJSON(result);
+					$("#class_realname").show();
+					$("#class_mobile").show();
+					$("#realname").val(jsonArray.realname);
+					$("#mobile").val(jsonArray.mobile);
+					$("#user_id").val(jsonArray.id);
+				}
+			},
+			error: function(){
+			}
+		});
+	});
+	
     form.verify({
 		otherReq:function(value,item){
 			var $ = layui.$;
@@ -208,33 +233,7 @@ layui.use(['form','layer','laydate'], function(){
     });
 
     form.on('submit(add)', function(data){
-
 		s_admin_show('開始時間の設定', '<?php echo base_url()?>ManageUse/recycleBin',800,700);
-		
-		// var vehicle_radio = $('input[name="vehicle_radio"]:checked').val();
-		// var type_radio = $('input[name="type_radio"]:checked').val();
-		// var index = layer.confirm('よろしいですか？', {icon: 3, title:'荻原建設',btn: ['確定', 'キャンセル']}, function(){
-
-			// $.ajax({
-				// url : "<?php echo current_url(); ?>",
-				// type: 'POST',
-				// data: {vehicle_type_ids:type_radio,vehicle_ids:vehicle_radio,user_id:data.field.user_id,set_time:data.field.set_time,email:data.field.email,mobile:data.field.mobile,sort:data.field.sort,remark:data.field.remark,status:data.field.status},
-				// dataType: 'JSON',
-				// success: function(ret){
-					// var icon = 200 == ret.ret? 6: 5;
-					// if(200 == ret.ret){
-						// var index = parent.layer.getFrameIndex(window.name);
-						// parent.layer.close(index);
-					// }else{
-						// layer.close(layer.index);
-					// }
-				// },
-				// error: function(err) {
-					// layer.msg('送信に失敗');
-				// }
-			// });
-			// return false;
-		// }); 
     });
 	
 	$(function(){
@@ -243,7 +242,7 @@ layui.use(['form','layer','laydate'], function(){
 			type:"POST",
 			url:"<?php echo base_url() ?>Appoint/Icon/ajaxTypeVehicle",
 			dataType: 'json',
-			data: {type_id:1},
+			data: {type_id:<?=$type_list[0]['id']?>},
 			success:function(result){
 				$("#vehicle").empty();
 				var jsonArray = $.grep(result,function(value){

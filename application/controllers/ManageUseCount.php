@@ -19,30 +19,40 @@ class ManageUseCount extends Curd
         $vehicle_where = [];
         $vehicle_where['isdelete'] = "0";
         $vehicle_where['status'] = "1";
-        $data['type_list'] = $this->db->where($vehicle_where)->order_by('create_time','DESC')->get('ci_manage_vehicle_type')->result_array();
+        $data['type_list'] = $this->db->where($vehicle_where)->order_by('id','ASC')->get('ci_manage_vehicle_type')->result_array();
         foreach($data['type_list'] as $key => $val){
             $where = [];
             $where['type_id'] = $val['id'];
             $where['isdelete'] = "0";
             $where['status'] = "1";
-            $data['type_list'][$key]['vehicle_list'] = $this->db->where($where)->order_by('create_time','DESC')->get('ci_manage_vehicle')->result_array();
+            $type_list = $this->db->where($where)->order_by('id','ASC')->get('ci_manage_vehicle')->result_array();
+            if(count($type_list)<=0){
+                unset($data['type_list'][$key]);
+            }else{
+                $data['type_list'][$key]['vehicle_list'] = $type_list;
+            }
         }
-
         $this->db->where(['isdelete' => '0']);
+
         if(!empty($_GET['vehicle_id'])){
             $this->db->where(['vehicle_id' => $_GET['vehicle_id']]);
         }else{
-            $this->db->where(['vehicle_id' => 1]);
+            $ty = $this->db->where(['status'=>'1','isdelete'=>'0'])->order_by('id ASC')->get('ci_manage_vehicle_type')->result_array()[0];
+            $ve = $this->db->where(['status'=>'1','isdelete'=>'0','type_id'=> $ty['id']])->order_by('id ASC')->get('ci_manage_vehicle')->result_array()[0];
+            $this->db->where(['vehicle_id' => $ve['id']]);
         }
-        $data['set_info'] = $this->db->get('ci_manage_vehicle_user')->result_array();
+        $data['set_info'] = $this->db->where(['is_check'=>2])->get('ci_manage_vehicle_user')->result_array();
         if(!empty($_GET['vehicle_id'])){
             $data['vehicle_info'] = $this->db->where(['id'=>$_GET['vehicle_id']])->get('ci_manage_vehicle')->row_array();
         }else{
-            $data['vehicle_info'] = $this->db->where(['id'=>1])->get('ci_manage_vehicle')->row_array();
+            $type_info = $this->db->where(['status'=>'1','isdelete'=>'0'])->order_by('id ASC')->get('ci_manage_vehicle_type')->result_array()[0];
+            $data['vehicle_info'] = $this->db->where(['type_id'=>$type_info['id']])->order_by('id ASC')->get('ci_manage_vehicle')->result_array()[0];
         }
         if(!empty($_GET['user_id'])){
             $data['user_info'] = $this->db->where(['id'=>$_GET['user_id']])->get('ci_manage_user')->row_array();
         }
+
+        //print_r($data['vehicle_info']);exit;
         return $this->load->view($this->controller . '/list', $data);
     }
 }

@@ -16,15 +16,21 @@ class ManageUse extends Curd
 
     public function index()
 	{
-        $this->load->library('session');
-		if(!$this->session->userdata('user_id')){
-			redirect('Pub/login');exit;
-        }
-        
         $data = $_GET;
         $post = $_POST;
         $this->db->select();
         /*search-form-inline sta*///////////////////////////////////////////////////
+
+
+        if(!empty($post['search_is_check'])){
+            if($post['search_is_check'] == '1'){
+                $this->db->where(['is_check' => '1']);
+            }else if($post['search_is_check'] == '2'){
+                $this->db->where(['is_check' => '2']);
+            }else if($post['search_is_check'] == '3'){
+                $this->db->where(['is_check' => '3']);
+            }
+        }
 
         if(!empty($post['search_realname'])){   
             $user_id = $this->db->where(['realname'=>$post['search_realname']])->get('ci_manage_user')->row_array();
@@ -53,7 +59,7 @@ class ManageUse extends Curd
         
         /*search-form-inline end*///////////////////////////////////////////////////
         $this->db->where(['isdelete' => '0']);
-        $this->db->order_by('sort','asc');
+        $this->db->order_by('create_time','DESC');
         if(isset($data['name'])){
             $this->db->where(['name' => $data['name']]);
             $param = "&name=" . $data['name'];
@@ -72,6 +78,17 @@ class ManageUse extends Curd
             $result['list'][$key]['vehicleimage'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehicleimage'];
         }
         /*search-form-inline sta*/////////////////////////////////////////////////////
+        if(!empty($post['search_is_check'])){
+            if($post['search_is_check'] == '1'){
+                $result['search_is_check'] = '1';
+            }else if($post['search_is_check'] == '2'){
+                $result['search_is_check'] = '2';
+            }else if($post['search_is_check'] == '3'){
+                $result['search_is_check'] = '3';
+            }else{
+                $result['search_is_check'] = '-1';
+            }
+        }
         if(!empty($post['search_realname']))
 		{
             $result['search_realname'] = $post['search_realname'];
@@ -90,16 +107,22 @@ class ManageUse extends Curd
     }
     public function recycleBin()
 	{
-        $this->db->where(['isdelete' => '0']);
-        $this->db->where(['vehicle_id' => $_GET['vehicle_id']]);
-        $data['set_info'] = $this->db->get('ci_manage_vehicle_user')->result_array();
-        if(!empty($_GET['vehicle_id'])){
+        if(!empty($_GET['vehicle_id']) && !empty($_GET['user_id'])){
+            $this->db->where(['isdelete' => '0']);
+            $this->db->where(['status' => '1']);
+            $this->db->where(['is_check' => 2]);
+            $this->db->where(['vehicle_id' => $_GET['vehicle_id']]);
+            $data['set_info'] = $this->db->get('ci_manage_vehicle_user')->result_array();
+            foreach($data['set_info'] as $key =>$val)
+            {
+                $data['set_info'][$key]['realname']= $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array()['realname'];
+            }
             $data['vehicle_info'] = $this->db->where(['id'=>$_GET['vehicle_id']])->get('ci_manage_vehicle')->row_array();
-        }
-        if(!empty($_GET['user_id'])){
+            $data['vehicle_info']['typename'] = $this->db->where(['id'=>$data['vehicle_info']['type_id']])->get('ci_manage_vehicle_type')->row_array()['typename'];
             $data['user_info'] = $this->db->where(['id'=>$_GET['user_id']])->get('ci_manage_user')->row_array();
+
+            return $this->load->view($this->controller . '/recycleBin', $data);
         }
-        return $this->load->view($this->controller . '/recycleBin', $data);
     }
     public function recycle()
 	{
@@ -164,7 +187,6 @@ class ManageUse extends Curd
         if(!$this->session->userdata('user_id')){
             redirect('Pub/login');exit;
         }
-
         $post = $_POST;
         if($post){
             $start_end =  explode("~~~",$post['start_end']);
@@ -186,13 +208,18 @@ class ManageUse extends Curd
             $vehicle_where['isdelete'] = "0";
             $vehicle_where['status'] = "1";
             $vehicle_data = [];
-            $vehicle_data['type_list'] = $this->db->where($vehicle_where)->order_by('create_time','DESC')->get('ci_manage_vehicle_type')->result_array();
+            $vehicle_data['type_list'] = $this->db->where($vehicle_where)->order_by('id','ASC')->get('ci_manage_vehicle_type')->result_array();
             foreach($vehicle_data['type_list'] as $key => $val){
                 $where = [];
                 $where['type_id'] = $val['id'];
                 $where['isdelete'] = "0";
                 $where['status'] = "1";
-                $vehicle_data['type_list'][$key]['vehicle_list'] = $this->db->where($where)->order_by('create_time','DESC')->get('ci_manage_vehicle')->result_array();
+                $type_list = $this->db->where($where)->order_by('id','ASC')->get('ci_manage_vehicle')->result_array();
+                if(count($type_list)<=0){
+                    unset($vehicle_data['type_list'][$key]);
+                }else{
+                    $data['type_list'][$key]['vehicle_list'] = $type_list;
+                }
             }
             return $this->load->view($this->controller . '/add', $vehicle_data);
         }

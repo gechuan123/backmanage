@@ -19,10 +19,38 @@
 		<div class="layui-input-inline">
 		<input type="text" style="width: 255px;" name="search_vehicleplate" placeholder="車両NO" autocomplete="off" class="layui-input" value="<?=!empty($search_vehicleplate)?$search_vehicleplate:''?>">
 		</div>
+		<div class="layui-input-inline">
+			<select name="search_is_check">
+			
+				<?php if($search_is_check == '-1'){?>
+					<option style="color:#fff;background:#90EE90" value="-1" selected>予約状態</option>
+				<?php }else{?>
+					<option style="color:#fff;background:#90EE90" value="-1">予約状態</option>
+				<?php }?>
+				
+				<?php if($search_is_check == 1){?>
+					<option style="color:#fff;background:#F35336" value="1" selected>未定義</option>
+				<?php }else{?>
+					<option style="color:#fff;background:#F35336" value="1">未定義</option>
+				<?php }?>
+				
+				<?php if($search_is_check == 2){?>
+					<option style="color:#fff;background:#00FF00" value="2" selected>予約成功</option>
+				<?php }else{?>
+					<option style="color:#fff;background:#00FF00" value="2">予約成功</option>
+				<?php }?>
+				
+				<?php if($search_is_check == 3){?>
+					<option style="color:#fff;background:#C0C0C0" value="3" selected>予約をキャンセル</option>
+				<?php }else{?>
+					<option style="color:#fff;background:#C0C0C0" value="3">予約をキャンセル</option>
+				<?php }?>
+
+			</select>
+	</div>
 		<button type="submit" class="layui-btn layui-btn-radius" id="ord_search_bak">検索</button>
 		<button type="button" class="layui-btn layui-btn-radius" id="ord_reset">リセット</button>
 	</form>
-	
     <table class="layui-table">
         <thead>
         <tr>
@@ -36,6 +64,7 @@
             <th class="list-center">車両NO</th>
             <th class="list-center">時間</th>
             <th class="list-center">最終</th>
+			<th class="list-center">予約状態</th>
             <th>オペレーティング</th>
         </thead>
         <tbody>
@@ -46,11 +75,36 @@
                 </td>
                 <td class="list-center"><?php echo $item['realname'] ?></td>
 				<td class="list-center"><?php echo $item['email'] ?></td>
-                <td class="list-center"><?php echo $item['vehicleimage'] ?></td>
+                <td class="list-center"><img src='<?php echo base_url()?>appoint/vehicle/<?php echo $item["vehicleimage"] ?>' height='100px' width='100px'></td>
                 <td class="list-center"><?php echo $item['vehiclename'] ?></td>
                 <td class="list-center"><?php echo $item['vehicleplate'] ?></td>
 				<td class="list-center"><?php echo $item['start_time'] ?></td>
 				<td class="list-center"><?php echo $item['end_time'] ?></td>
+				<td class="list-center">
+
+					<?php if($item['is_check'] == 1){?>
+						<select name="is_check"  style = "color:#fff;background:#F35336;width:140px;" class="is_check">
+					<?php }else if($item['is_check'] == 2){?>
+						<select name="is_check"  style = "color:#fff;background:#00FF00;width:140px;" class="is_check">
+					<?php }else if($item['is_check'] == 3){?>
+						<select name="is_check"  style = "color:#fff;background:#C0C0C0;width:140px;" class="is_check">
+					<?php }?>
+					
+					<?php if($item['is_check'] == 1){?>
+						<option style="background:#1E9FFF" value="1_<?php echo $item['id']?>" selected>未定義</option>
+						<option style="background:#00FF00" value="2_<?php echo $item['id']?>">予約成功</option>
+						<option style="background:#C0C0C0" value="3_<?php echo $item['id']?>">予約をキャンセル</option>
+					<?php }else if($item['is_check'] == 2){?>
+						<option style="background:#F35336" value="1_<?php echo $item['id']?>">未定義</option>
+						<option style="background:#00FF00" value="2_<?php echo $item['id']?>" selected>予約成功</option>
+						<option style="background:#C0C0C0" value="3_<?php echo $item['id']?>">予約をキャンセル</option>
+					<?php }else if($item['is_check'] == 3){?>
+						<option style="background:#F35336" value="1_<?php echo $item['id']?>">未定義</option>
+						<option style="background:#00FF00" value="2_<?php echo $item['id']?>">予約成功</option>
+						<option style="background:#C0C0C0" value="3_<?php echo $item['id']?>" selected>予約をキャンセル</option>
+					<?php }?>
+					</select>
+				</td>
                 <td class="td-manage">
                     <?php echo td_btn($this, $item['id'], ['delete'], true); ?>
                 </td>
@@ -63,26 +117,32 @@
 	</xblock>
     <?php echo $page; ?>
 </div>
-
 <script>
 $("#ord_reset").click(function(){
 	$(location).attr('href', '<?php echo base_url()?>ManageUse');
 });
-layui.use('laydate', function(){
-	var laydate = layui.laydate;
-	laydate.render({
-		 elem: '#test-limit2'
-		,type: 'date'
-		,format: 'yyyy-MM-dd'
-		,btns: ['clear', 'now']
+$('.is_check').change(function(){
+	
+	
+	var is_check = $(this).val();
+	
+	layer.confirm('変更を確認する？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(indexa){
+		parent.layer.close(indexa);
+		var show = layer.open({
+			type: 3,
+			area: ['400px', '100px'],
+
+			success: function(){
+				$.post('<?=base_url()?>Appoint/Icon/ajaxSelectIsCheck ',{is_check:is_check},function(data){
+					
+					 if(data == "ok"){
+						 location.reload();
+					 }
+				});
+			}
+		});
 	});
-	laydate.render({
-		elem: '#test6'
-		,range: true
-		,min: '2020-1-1'
-		,max: '2030-12-31'
-	});
-});
+})
 </script>
 </body>
 </html>

@@ -66,7 +66,7 @@
                 <td class="list-center"><?php echo $item['vehiclename'] ?></td>
 				<td class="list-center"><?php echo $item['vehicleplate'] ?></td>
 				<td class="list-center">
-<img height="80px" width="80px" class="layui-upload-img" id="show_vehicleimage" src="<?php echo base_url()?>Appoint/vehicle/<?php echo $item['vehicleimage_thumb'];?>">
+<img height="80px" width="80px" class="layui-upload-img" id="show_vehicleimage" src="<?php echo base_url()?>appoint/vehicle/<?php echo $item['vehicleimage_thumb'];?>">
 				</td>
                 <td class="list-center"><input type="text" name="sort" id="<?php echo $item['id'] ?>" class="layui-input input-xs" value="<?php echo $item['sort'] ?>"></td>
                 <td class="list-center">
