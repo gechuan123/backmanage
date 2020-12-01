@@ -57,13 +57,14 @@
 		</div>
 		<?php if(isset($_SESSION['id'])){?>
 		 <div class="site-text" style="float: right;margin-right:25%;margin-top:-51px">
-				 <a href="javascript:void(0)"  id="up_user">個人情報</a>
+				<a href="javascript:void(0)" style="font-size:16px;font-weight:bold;" id="up_user"><i class="layui-icon layui-icon-friends"></i>会員情報</a>&nbsp;&nbsp;
+				<a href="javascript:void(0)" style="font-size:16px;font-weight:bold;" id="appointment_info"><i class="layui-icon layui-icon-reply-fill"></i>予約情報</a>
 		</div>
-		 <div class="site-text" style="float: right;margin-right:25%;margin-top:-19px">
-				 <a href="javascript:void(0)"  id="appointment_info">私の予約情報</a>
+		<div class="site-text" style="float: right;margin-right:25%;margin-top:-19px">
+				<a href="javascript:void(0)" style="font-size:16px;font-weight:bold;"></a>
 		</div>
-		<div class="site-text" style="float: right;margin-right:-1%;margin-top:-40px">
-				<button type="button" id="log_out" class="layui-btn layui-btn-radius layui-btn-danger">ログアウト</button>
+		<div class="site-text" style="float: right;margin-right:-1%;margin-top:-20px">
+			<button type="button" id="log_out" class="layui-btn layui-btn-radius layui-btn-danger">ログアウト</button>
 		</div>  
 		<?php }else{?>
 		    <div class="site-text" style="float: right;margin-right:0%;margin-top:-40px">
