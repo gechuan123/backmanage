@@ -81,7 +81,7 @@ class Appointment extends Appoint
         }
         $data['start_time'] = $params['start_time'];
         $data['end_time'] = $params['end_time'];
-        $data['status'] = '0';
+        $data['status'] = '1';
         $data['remark'] = $params['comment'];
         $data['isdelete'] = '0';
         $data['create_time'] = time();
