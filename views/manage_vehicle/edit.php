@@ -34,7 +34,7 @@
 			<div class="layui-upload">
 				<button type="button" class="layui-btn" id="img">画像</button>
 				<div class="layui-input-block">
-					<img height="200px" width="300px" class="layui-upload-img" id="show_vehicleimage" src="<?php echo base_url()?>Appoint/vehicle/<?php echo $vehicleimage;?>">
+					<img height="200px" width="300px" class="layui-upload-img" id="show_vehicleimage" src="<?php echo base_url()?>appoint/vehicle/<?php echo $vehicleimage;?>">
 					<p id="Textimage"></p>
 				</div>
 			</div>

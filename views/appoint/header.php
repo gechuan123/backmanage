@@ -42,6 +42,7 @@
 		.layui-textarea {
 			width: 90%;
 		}
+
 	</style>
 </head>
 <body>
@@ -56,9 +57,13 @@
 			</div>
 		</div>
 		<?php if(isset($_SESSION['id'])){?>
-		 <div class="site-text" style="float: right;margin-right:25%;margin-top:-51px">
-				<a href="javascript:void(0)" style="font-size:16px;font-weight:bold;" id="up_user"><i class="layui-icon layui-icon-friends"></i>会員情報</a>&nbsp;&nbsp;
-				<a href="javascript:void(0)" style="font-size:16px;font-weight:bold;" id="appointment_info"><i class="layui-icon layui-icon-reply-fill"></i>予約情報</a>
+		 <div class="site-text" style="float: right;margin-right:20%;margin-top:-51px">
+			<a href="javascript:void(0)" style="font-size:17px;font-weight:bold;" id="up_user">
+				<i class="layui-icon layui-icon-friends"> </i> 会員情報
+			</a>&nbsp;&nbsp;&nbsp;&nbsp;
+			<a href="javascript:void(0)" style="font-size:17px;font-weight:bold;" id="appointment_info">
+				<i class="layui-icon layui-icon-reply-fill"> </i> 予約情報
+			</a>
 		</div>
 		<div class="site-text" style="float: right;margin-right:25%;margin-top:-19px">
 				<a href="javascript:void(0)" style="font-size:16px;font-weight:bold;"></a>
@@ -121,7 +126,7 @@ layui.use(['layer', 'form','element'], function(){
 				,title: 'ユーザー情報の更新'
 				,content: '<?php echo base_url() ?>Appoint/login/up_user'
 				,maxmin: true
-				,area: ['25%', '60%']
+				,area: ['35%', '70%']
 				,btn: ['確認', 'キャンセル']
 				,yes: function(index, layero){
 					
@@ -154,7 +159,7 @@ layui.use(['layer', 'form','element'], function(){
 				,title: 'ユーザー情報の更新'
 				,content: '<?php echo base_url() ?>Appoint/Appointment/Index'
 				,maxmin: true
-				,area: ['60%', '75%']
+				,area: ['100%', '100%']
 				,btn: ['キャンセル']
 				,btn2: function(index, layero){
 				}

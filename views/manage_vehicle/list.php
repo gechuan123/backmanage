@@ -52,7 +52,6 @@
 			<th class="list-center">画像</th>
             <th class="list-center">状態</th>
             <th class="list-center">作成時間</th>
-            <th class="list-center">更新時間</th>
             <th>オペレーティング</th>
         </thead>
         <tbody>
@@ -71,7 +70,6 @@
                     <?php echo td_btn($this, $item['id'], ['status'], true, $item['status']); ?>
                 </td>
                 <td class="list-center"><?php echo date('Y-m-d', $item['create_time']) ?></td>
-                <td class="list-center"><?php echo date('Y-m-d', $item['update_time']) ?></td>
                 <td class="td-manage">
                     <?php echo td_btn($this, $item['id'], ['edit', 'show', 'delete'], true); ?>
                 </td>
@@ -80,7 +78,7 @@
         </tbody>
     </table>
 	<xblock>
-		<?php echo btn_list($this, ['add', 'sort', 'forbidden', 'recover', 'delAll', 'recycleBin'], $count); ?>
+		<?php echo btn_list($this, ['add', 'forbidden', 'recover', 'delAll', 'recycleBin'], $count); ?>
 	</xblock>
     <?php echo $page; ?>
 </div>

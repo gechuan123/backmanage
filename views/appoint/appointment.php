@@ -57,7 +57,7 @@
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label" style="width:120px">コメント</label>
             <div class="layui-input-block">
-            <textarea style="width:500px;height:200px;" name="comment" placeholder="内容を入力してください" class="layui-textarea"></textarea>
+            <textarea style="width:700px;height:60px;" name="comment" placeholder="内容を入力してください" class="layui-textarea" maxlength="250"></textarea>
             </div>
         </div>
         </div>
@@ -65,7 +65,7 @@
     </fieldset>
     <?php }?>
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 15px;">
-        <legend>予約の詳細</legend>
+        <legend>車両予約の詳細</legend>
     <div class="main" style="margin-left:30px;margin-right:30px">
 		
 	    <div id="calendar1"></div>

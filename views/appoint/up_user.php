@@ -18,7 +18,7 @@
             <div class="layui-inline">
             <label class="layui-form-label" style="width:120px">メール</label>
             <div class="layui-input-inline">
-                <input type="text" class="layui-input" name="email" value="<?php echo $user_info['email']?>" lay-verify="required" id="end" placeholder="記入してください" lay-key="10" >
+                <input type="text" style="width:280px;" class="layui-input" name="email" value="<?php echo $user_info['email']?>" lay-verify="required" id="end" placeholder="記入してください" lay-key="10" >
             </div>
             </div>
         </div>

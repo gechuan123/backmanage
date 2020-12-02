@@ -46,6 +46,10 @@
     padding: 60px 10px;
     text-align: center;
 }
+
+.hasbg{background-size:cover;background-position:center center;background-repeat:no-repeat;background-attachment:scroll;position:relative;width:200px;height:250px;margin:auto;}
+.hasbg img{width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;}
+
 </style>
 <div class="pages">
 	<h2>予約時間を選択</h2>
@@ -74,8 +78,12 @@
 					<ul class="site-doc-icon"  style="width:100%">
 						<?php foreach($v as $key=>$value) {?>
 						
-						<li style="margin-left:6%">
-							<img src="<?php echo base_url().'/appoint/vehicle/'.$value['vehicleimage'] ?>" class="layui-upload-img">
+						
+
+						<li style="margin-left:6%;height:auto;float:none;display:inline-block;">
+							<div class="hasbg">
+								<img src="<?php echo base_url().'/appoint/vehicle/'.$value['vehicleimage'] ?>">
+							</div>
 							<div class="name"><?php echo $value['vehiclename']?></div>
 							<div class="layui-right">
 								<?php echo $value['vehicleplate']?>

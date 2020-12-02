@@ -48,7 +48,7 @@
 <div class="modal fade" id="ModalAdd" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<form class="form-horizontal" method="POST" action="<?=base_url()?>Appoint/Icon/addEventDate">
+			<form class="form-horizontal" method="POST" action="<?=base_url()?>Appoint/Icon/addEventDate" id="rform">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 					<h4 class="modal-title" id="myModalLabel">追加</h4>
@@ -173,6 +173,15 @@
 	<script src='<?php echo base_url() ?>appoint/js/moment.min.js'></script>
 	<script src='<?php echo base_url() ?>appoint/js/fullcalendar.min.js'></script>
 	<script>
+	
+
+	layui.use(['form','layer','laydate'], function(){
+		var form = layui.form;
+		form.render();
+		$(document).on('click',"#rform",function(){
+			layer.msg("予約成功!");
+		});
+	});
 
 	var d=new Date();
 	var year=d.getFullYear();
