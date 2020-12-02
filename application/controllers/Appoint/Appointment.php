@@ -61,6 +61,9 @@ class Appointment extends Appoint
         $data['user_id'] = $this->session->id;
 
         $data['vehicle_id'] = $params['id'];
+        $vehicle_info = $this->db->select('vehiclename')->where(['id'=>$params['id']])->get('ci_manage_vehicle')->row_array();
+
+        $data['title'] = $vehicle_info['vehiclename'];
 
         if(empty($params['start_time'])){
             die(CallbackMessage(false,'利用開始時間は空ではない!'));
@@ -78,9 +81,9 @@ class Appointment extends Appoint
         }
         $data['start_time'] = $params['start_time'];
         $data['end_time'] = $params['end_time'];
-        $data['status'] = 0;
+        $data['status'] = '1';
         $data['remark'] = $params['comment'];
-        $data['isdelete'] = 0;
+        $data['isdelete'] = '0';
         $data['create_time'] = time();
         $data['update_time'] = 0;
         $add_appointment = $this->db->insert('manage_vehicle_user', $data); 
