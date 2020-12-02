@@ -67,7 +67,7 @@ if(!function_exists('regMatch_user')){
 }
 if(!function_exists('verify_email')){
         function verify_email($email=''){
-                $pattern = '/^\w{3,}@([a-z]{2,7}|[0-9]{3})\.(com|cn)$/';
+                $pattern = '/^[a-z0-9A-Z]+[- | a-z0-9A-Z . _]+@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-z]{2,}$/';
              
                 $result = preg_match_all($pattern, $email, $matches);
                 
