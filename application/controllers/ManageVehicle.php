@@ -55,7 +55,7 @@ class ManageVehicle extends Curd
         /*search-form-inline end*/////////////////////////////////////////////////////////
 
         $this->db->where(['isdelete' => '0']);
-        $this->db->order_by('sort','asc');
+        $this->db->order_by('create_time','DESC');
         if(isset($data['name'])){
             $this->db->where(['name' => $data['name']]);
             $param = "&name=" . $data['name'];
@@ -100,6 +100,7 @@ class ManageVehicle extends Curd
         if(IS_POST){
             $data = [];
             $data = $_POST;
+			
             $data['create_time'] = time();
             if($this->db->insert($this->table, $data)){
                 die(json_encode(array('ret'=>200,'desc'=>'送信成功')));

@@ -148,8 +148,9 @@ class Icon extends Appoint
                 $thumbdata = $newname;
             }
         }
-        //$dirroot = $_SERVER['DOCUMENT_ROOT'];
-        //$this->dealthumb($dirroot."/public/img/".$data);
+        $dirroot = $_SERVER['DOCUMENT_ROOT'];
+        $this->dealthumb($dirroot."/appoint/vehicle/".$data);
+		
         //上传失败
         if(!$data){
             echo json_encode(array('status'=>0,'msg'=>"上传失败！"));

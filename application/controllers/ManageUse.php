@@ -77,6 +77,8 @@ class ManageUse extends Curd
             $result['list'][$key]['vehicleplate'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehicleplate'];
             $result['list'][$key]['vehicleimage'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehicleimage'];
         }
+		
+		//print_r($result);exit;
         /*search-form-inline sta*/////////////////////////////////////////////////////
         if(!empty($post['search_is_check'])){
             if($post['search_is_check'] == '1'){

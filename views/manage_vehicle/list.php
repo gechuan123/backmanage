@@ -50,7 +50,6 @@
             <th class="list-center">名前</th>
 			<th class="list-center">ナンバープレート</th>
 			<th class="list-center">画像</th>
-            <th class="list-center">ソート</th>
             <th class="list-center">状態</th>
             <th class="list-center">作成時間</th>
             <th class="list-center">更新時間</th>
@@ -68,7 +67,6 @@
 				<td class="list-center">
 <img height="80px" width="80px" class="layui-upload-img" id="show_vehicleimage" src="<?php echo base_url()?>appoint/vehicle/<?php echo $item['vehicleimage_thumb'];?>">
 				</td>
-                <td class="list-center"><input type="text" name="sort" id="<?php echo $item['id'] ?>" class="layui-input input-xs" value="<?php echo $item['sort'] ?>"></td>
                 <td class="list-center">
                     <?php echo td_btn($this, $item['id'], ['status'], true, $item['status']); ?>
                 </td>

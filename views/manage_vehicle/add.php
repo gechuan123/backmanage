@@ -33,21 +33,12 @@
 			<div class="layui-upload">
 				<button type="button" class="layui-btn" id="img">画像</button>
 				<div class="layui-input-block" id="image">
-					 
 					<p id="Textimage"></p>
-					<input type="hidden" name="vehicleimage" lay-verify="vehicleimage" id="vehicleimage" value="">
-					<input type="hidden" name="vehicleimage_thumb" id="vehicleimage_thumb" value="">
 				</div>
 			</div>
 		</div>
-			
-		
-        <div class="layui-form-item">
-            <label class="layui-form-label">ソート：</label>
-            <div class="layui-input-block">
-                <input type="text" name="sort" placeholder="" autocomplete="off" class="layui-input">
-            </div>
-        </div>
+<input type="hidden" name="vehicleimage" lay-verify="vehicleimage" id="vehicleimage" >
+<input type="hidden" name="vehicleimage_thumb" id="vehicleimage_thumb">
         <div class="layui-form-item">
             <label class="layui-form-label">状態：</label>
             <div class="layui-input-block">

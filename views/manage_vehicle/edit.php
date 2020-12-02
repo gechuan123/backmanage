@@ -36,18 +36,11 @@
 				<div class="layui-input-block">
 					<img height="200px" width="300px" class="layui-upload-img" id="show_vehicleimage" src="<?php echo base_url()?>Appoint/vehicle/<?php echo $vehicleimage;?>">
 					<p id="Textimage"></p>
-					<input type="hidden" name="vehicleimage" lay-verify="vehicleimage" id="vehicleimage" value="<?php echo $vehicleimage;?>">
-					<input type="hidden" name="vehicleimage_thumb" id="vehicleimage_thumb" value="<?php echo $vehicleimage_thumb;?>">
 				</div>
 			</div>
 		</div>
-		
-        <div class="layui-form-item">
-            <label class="layui-form-label">ソート：</label>
-            <div class="layui-input-block">
-                <input type="text" name="sort" placeholder="" autocomplete="off" class="layui-input" value="<?php echo $sort;?>" >
-            </div>
-        </div>
+		<input type="hidden" name="vehicleimage" lay-verify="vehicleimage" id="vehicleimage" value="<?php echo $vehicleimage;?>">
+		<input type="hidden" name="vehicleimage_thumb" id="vehicleimage_thumb" value="<?php echo $vehicleimage_thumb;?>">
         <div class="layui-form-item">
             <label class="layui-form-label">状態：</label>
             <div class="layui-input-block">
