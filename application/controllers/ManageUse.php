@@ -69,16 +69,25 @@ class ManageUse extends Curd
         $data['p'] = isset($data['p']) ? $data['p'] : 1;
         $this->load->helper('list');
         $result = paginate($this, $this->table, $this->limit, $data['p'], true, $param);
+ 
         foreach($result['list'] as $key => $val)
         {
-            $result['list'][$key]['realname'] = $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array()['realname'];
-            $result['list'][$key]['email'] = $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array()['email'];
-            $result['list'][$key]['vehiclename'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehiclename'];
-            $result['list'][$key]['vehicleplate'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehicleplate'];
-            $result['list'][$key]['vehicleimage'] = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array()['vehicleimage'];
-        }
 		
-		//print_r($result);exit;
+			
+            $realname = $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array();
+    
+			
+            $result['list'][$key]['realname'] = isset($realname['realname'])?$realname['realname']:"";
+            $email = $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array();
+            $result['list'][$key]['email'] = isset($email['email'])?$email['email']:"";
+            $vehiclename = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array();
+            $result['list'][$key]['vehiclename'] = isset($vehiclename['vehiclename'])?$vehiclename['vehiclename']:"";
+            $vehicleplate = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array();
+            $result['list'][$key]['vehicleplate'] = isset($vehicleplate['vehicleplate'])?$vehicleplate['vehicleplate']:"";
+            $vehicleimage = $this->db->where(['id'=>$val['vehicle_id']])->get('ci_manage_vehicle')->row_array();
+            $result['list'][$key]['vehicleimage'] = isset($vehicleimage['vehicleimage'])?$vehicleimage['vehicleimage']:"";
+        }
+
         /*search-form-inline sta*/////////////////////////////////////////////////////
         if(!empty($post['search_is_check'])){
             if($post['search_is_check'] == '1'){
