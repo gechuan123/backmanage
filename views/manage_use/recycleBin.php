@@ -61,13 +61,13 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="title" class="col-sm-2 control-label">重機</label>
+						<label for="title" class="col-sm-2 control-label">機種/車種</label>
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control" value="<?=!empty($vehicle_info['typename'])?$vehicle_info['typename']:''?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="title" class="col-sm-2 control-label">車名</label>
+						<label for="title" class="col-sm-2 control-label">車両名</label>
 						<div class="col-sm-10">
 							<input type="text" readonly name="title" class="form-control" value="<?=!empty($vehicle_info['vehiclename'])?$vehicle_info['vehiclename']:''?>">
 						</div>
@@ -122,13 +122,13 @@
 				</div>
 				<div class="modal-body">
 					<div class="form-group">
-						<label for="title" class="col-sm-2 control-label">重機</label>
+						<label for="title" class="col-sm-2 control-label">機種/車種</label>
 						<div class="col-sm-10">
 							<input type="text" readonly class="form-control" value="<?=!empty($vehicle_info['typename'])?$vehicle_info['typename']:''?>">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="title" class="col-sm-2 control-label">車名</label>
+						<label for="title" class="col-sm-2 control-label">車両名</label>
 						<div class="col-sm-10">
 							<input type="text" readonly name="title" class="form-control" id="title" autocomplete="off" placeholder="30文字まで" maxlength='30'>
 						</div>

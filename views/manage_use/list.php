@@ -62,8 +62,8 @@
 			<th class="list-center">車両IMG</th>
             <th class="list-center">車両名</th>
             <th class="list-center">車両NO</th>
-            <th class="list-center">時間</th>
-            <th class="list-center">最終</th>
+            <th class="list-center">開始時間</th>
+            <th class="list-center">終了時間</th>
 			<th class="list-center">予約状態</th>
             <th>オペレーティング</th>
         </thead>

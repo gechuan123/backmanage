@@ -27,8 +27,6 @@
             <a href="javascript:;"><?php echo $this->session->userdata('realname'); ?></a>
             <dl class="layui-nav-child">
                 <dd><a href="<?php echo base_url()?>Pub/logout">ログアウト</a></dd>
-				<dd><a style="cursor:pointer" onclick='x_admin_show("編集","<?php echo base_url()?>AdminUser/edit?id=<?=$this->session->userdata('user_id')?>")'>編集</a></dd>
-                <dd><a style="cursor:pointer" onclick='x_admin_show("詳細","<?php echo base_url()?>AdminUser/show?id=<?=$this->session->userdata('user_id')?>")'>詳細</a></dd>
             </dl>
         </li>
         <li class="layui-nav-item to-index"><a href="<?php echo base_url()?>Appoint/Index" target="_blank" >予約【ホーム】</a></li>

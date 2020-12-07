@@ -52,6 +52,7 @@
 		.layui-input,.layui-textarea{
 			width:90%;
 		}
+		
 	</style>
 <body>
 <div class="x-nav">
@@ -63,15 +64,17 @@
 		<div class="layui-form-item" id="class_1" style="display:">
             <label class="layui-form-label">機種/車種</label>
             <div class="layui-input-block">
+			<?php if(count($type_list)>0){?>
 				<?php foreach($type_list as $key => $val){?>
-				
-					<?php if($val['id'] == $vehicle_info['type_id']){?>
+
+					<?php if(count($vehicle_info)>0 && $val['id'] == $vehicle_info['type_id']){?>
 						<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>" checked>
 					<?php }else{?>
 						<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>">
 					<?php }?>
 					
 				<?php }?>
+			<?php }?>
             </div>
         </div>
 		<div class="layui-form-item" id="class_2" style="display:">

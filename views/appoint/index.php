@@ -47,7 +47,7 @@
     text-align: center;
 }
 
-.hasbg{background-size:cover;background-position:center center;background-repeat:no-repeat;background-attachment:scroll;position:relative;width:200px;height:250px;margin:auto;}
+.hasbg{background-size:cover;background-position:center center;background-repeat:no-repeat;background-attachment:scroll;position:relative;width:200px;height:125px;margin:auto;}
 .hasbg img{width:100%;height:100%;position:absolute;top:0;left:0;z-index:-1;-o-object-fit:cover;object-fit:cover;-o-object-position:center;object-position:center;}
 
 
@@ -106,7 +106,7 @@
 				</td>
 			</tr>
 		</table>
-
+		<BR/>
 	</div>
 </div>
 <script type="text/javascript">
@@ -219,7 +219,7 @@ layui.use(['layer', 'form','element'], function() {
 									arr.forEach(function (item, key) {
 										html+='<li style="margin-left:2%;height:auto;float:none;display:inline-block;">'
 											html+='<div class="hasbg">'
-												html+='<img src="/appoint/vehicle/'+item.vehicleimage+'">'
+												html+='<img src="<?php echo base_url() ?>appoint/vehicle/'+item.vehicleimage+'">'
 											html+='</div>'
 											html+='<div class="name">'+item.vehiclename+'</div>'
 											html+='<div class="layui-right">'

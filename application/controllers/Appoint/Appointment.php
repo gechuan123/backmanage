@@ -30,8 +30,8 @@ class Appointment extends Appoint
                //$vehicle_arr[$k]['title'] = '予約者:'.$v['realname'].'--車を予約する:'.$v['vehiclename'].'(車のナンバープレート:'.$v['vehicleplate'].')';
                $start_time = explode(" ",$v['start_time']);
                $end_time = explode(" ",$v['end_time']);
-               $vehicle_arr[$k]['start'] = $start_time[0].'T'.$start_time[1];
-               $vehicle_arr[$k]['end'] = $end_time[0].'T'.$end_time[1];
+               $vehicle_arr[$k]['start'] = $start_time[0].' '.$start_time[1];
+               $vehicle_arr[$k]['end'] = $end_time[0].' '.$end_time[1];
                if(!$params['id']){
                    $vehicle_arr[$k]['title'] = '車を予約する:'.$v['vehiclename'].'(車のナンバープレート:'.$v['vehicleplate'].')';
                    $vehicle_arr[$k]['className'] = 'green';
@@ -49,6 +49,7 @@ class Appointment extends Appoint
 
                
         }
+		//print_r($vehicle_arr);exit;
 
         $this->load->view('appoint/appointment',['id'=>$params['id'],'user_info'=>$user_info,'vehicle_arr'=>json_encode($vehicle_arr)]);
     }

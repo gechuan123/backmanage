@@ -4,7 +4,7 @@
 <div class="x-body">
     <form class="layui-form" action="javascript:void(0);" id="form">
 		<div class="layui-form-item">
-			<label class="layui-form-label">車両種類：</label>
+			<label class="layui-form-label">機種/車種：</label>
 			<div class="layui-input-block">
 			<select name="type_id" lay-verify="type_id">
 				<option value="-1">選択</option>
@@ -16,7 +16,7 @@
 		</div>
 		
         <div class="layui-form-item">
-            <label class="layui-form-label">車両名前：</label>
+            <label class="layui-form-label">車両名：</label>
             <div class="layui-input-block">
                 <input type="text" name="vehiclename" lay-verify="vehiclename" placeholder="車両名前 長さ2-16間。" autocomplete="off" class="layui-input" maxlength="16">
             </div>

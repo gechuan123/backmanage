@@ -58,7 +58,7 @@ body {
 			<legend>車両設定</legend>
 		</fieldset>
 		<div class="layui-form-item">
-            <label class="layui-form-label">メールボックス：</label>
+            <label class="layui-form-label">メールアドレス：</label>
             <div class="layui-input-block">
                 <input type="text" name="email" id="email" lay-verify="email|db_email" placeholder="入力されていません!" autocomplete="off" class="layui-input">
             </div>
@@ -78,7 +78,7 @@ body {
         </div>
 		
 		<div class="layui-form-item" id="class_1" style="display:">
-            <label class="layui-form-label">重機選択：</label>
+            <label class="layui-form-label">機種/車種：</label>
             <div class="layui-input-block">
 				<?php foreach($type_list as $key => $val){?>
 					<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>" <?php if($key==0){?>checked<?php }?>>
