@@ -22,7 +22,7 @@ class Pub extends Curd{
                 $session['user_id']  = $info['id'];
                 $session['realname'] = $data['user_name'];
                 $this -> session -> set_userdata($session);
-                return ajax_return_json($this,'登録成功', 1);
+                return ajax_return_json($this,'ログインしました', 1);
             }
             return ajax_return_json_error($this, '不正なアカウントまたはパスワード');
         }else{

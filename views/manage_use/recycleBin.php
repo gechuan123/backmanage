@@ -90,13 +90,13 @@
 					<div class="form-group">
 						<label for="start" class="col-sm-2 control-label">開始時間</label>
 						<div class="col-sm-10">
-							<input type="text" name="start" class="form-control" id="start" >
+							<input type="text" name="start" class="form-control" id="start" readonly="readonly" >
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="end" class="col-sm-2 control-label">終了時間</label>
 						<div class="col-sm-10">
-							<input type="text" name="end" class="form-control" id="end" >
+							<input type="text" name="end" class="form-control" id="end" readonly="readonly" >
 						</div>
 					</div>
 				</div>
@@ -104,7 +104,7 @@
 					<input type="hidden" name="vehicle_id" value="<?=!empty($vehicle_info['id'])?$vehicle_info['id']:''?>">
 					<input type="hidden" name="user_id" value="<?=!empty($user_info['id'])?$user_info['id']:''?>">
 					<button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-					<button type="submit" class="btn btn-primary">登録する</button>
+					<button type="submit" class="btn btn-primary" id='add'>登録する</button>
 				</div>
 			</form>
 		</div>
@@ -176,11 +176,25 @@
 	
 
 	layui.use(['form','layer','laydate'], function(){
+		var laydate = layui.laydate;
 		var form = layui.form;
 		form.render();
-		$(document).on('click',"#rform",function(){
+		$("#add").click(function(){
 			layer.msg("予約成功!");
 		});
+		
+		
+
+		laydate.render({
+		elem: '#end'
+		,type: 'datetime'
+		});
+		laydate.render({
+		elem: '#start'
+		,type: 'datetime'
+		});
+		
+		
 	});
 
 	var d=new Date();

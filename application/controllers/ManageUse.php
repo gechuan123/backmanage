@@ -126,7 +126,8 @@ class ManageUse extends Curd
             $data['set_info'] = $this->db->get('ci_manage_vehicle_user')->result_array();
             foreach($data['set_info'] as $key =>$val)
             {
-                $data['set_info'][$key]['realname']= $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array()['realname'];
+                $data['set_info'][$key]['realname']= $this->db->where(['id'=>$val['user_id']])->get('ci_manage_user')->row_array();
+				
             }
             $data['vehicle_info'] = $this->db->where(['id'=>$_GET['vehicle_id']])->get('ci_manage_vehicle')->row_array();
             $data['vehicle_info']['typename'] = $this->db->where(['id'=>$data['vehicle_info']['type_id']])->get('ci_manage_vehicle_type')->row_array()['typename'];

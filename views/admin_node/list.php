@@ -26,7 +26,7 @@
                             <th style="width:9%"  class="list-center" >ノード名</th>
                             <th style="width:8%"  class="list-center" >の種類</th>
                             <th style="width:5%"  class="list-center" >何級</th>
-                            <th style="width:8%"  class="list-center" >ソート</th>
+                            <th style="width:8%"  class="list-center" >順番</th>
                             <th style="width:8%"  class="list-center" >状態</th>
                             <th style="width:8%"  class="list-center" >メソッドリスト</th>
                             <th style="width:12%" class="list-center" >作成時間</th>

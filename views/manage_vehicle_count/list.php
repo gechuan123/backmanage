@@ -23,7 +23,7 @@
 
 <body>
 <div class="x-nav">
-	<span class="layui-breadcrumb"><a href="<?=base_url()?>AppointmentReg">最初のページ</a><a href="javascript:;">リスト</a></span>
+	<span class="layui-breadcrumb"><a href="<?=base_url()?>AppointmentReg">車両管理</a><a href="javascript:;">車両統計</a></span>
 
 </div>
 <div class="x-body">
@@ -50,7 +50,7 @@
                 <td>
                     <table class="layui-table">
                         <thead>
-							<th style="width:2%"  class="list-center" >車のふた/時間</th>
+							<th style="width:2%"  class="list-center" >車両名/時間</th>
                             <?php foreach($point as $k=>$v){?>
 							<th style="width:1%"  class="list-center" ><?php echo $v?>時</th>
 							<?php }?>

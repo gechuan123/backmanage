@@ -55,13 +55,13 @@
 	</style>
 <body>
 <div class="x-nav">
-    <span class="layui-breadcrumb"><a href="javascript:;">人員管理<?=$vehicle_info["id"]?></a> > <a href="javascript:;">情報統計</a></span>
+    <span class="layui-breadcrumb"><span>予約管理</span><span> > カレンダー</span></span>
 	<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="更新"><i class="layui-icon" style="line-height:30px">更新</i></a>
 </div>
 <div class="x-body">
     <form class="layui-form" action="javascript:void(0);" id="form">
 		<div class="layui-form-item" id="class_1" style="display:">
-            <label class="layui-form-label">重機選択：</label>
+            <label class="layui-form-label">機種/車種</label>
             <div class="layui-input-block">
 				<?php foreach($type_list as $key => $val){?>
 				
@@ -75,7 +75,7 @@
             </div>
         </div>
 		<div class="layui-form-item" id="class_2" style="display:">
-            <label class="layui-form-label">車両選択：</label>
+            <label class="layui-form-label">車両選択</label>
             <div class="layui-input-block">
 				<ul class="layui-tree" id="vehicle">
 				</ul>

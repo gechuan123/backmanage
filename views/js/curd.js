@@ -1,6 +1,6 @@
 /*無効&有効*/
 function changeStatus(url, id, str){
-    layer.confirm('有効・無効に変更します。よろしいですか？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(index){
+    layer.confirm('よろしいですか？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(index){
         $.post(url,{data:id},function (msg) {
             response_query(msg);
         })
@@ -36,7 +36,7 @@ function forbidden(url){
     if (data == null){
         layer.msg('にチェックを入れてください');return false;
     }
-    layer.confirm('有効・無効に変更します。よろしいですか？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(index){
+    layer.confirm('無効に変更します。よろしいですか？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(index){
         $.post(url,{data:data},function (msg) {
             response_query(msg);
         })
@@ -51,7 +51,7 @@ function recover(url){
         layer.msg('にチェックを入れてください');return false;
     }
 
-    layer.confirm('有効・無効に変更します。よろしいですか？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(index){
+    layer.confirm('有効に変更します。よろしいですか？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(index){
         $.post(url,{data:data},function (msg) {
             response_query(msg);
         })

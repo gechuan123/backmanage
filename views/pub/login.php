@@ -19,7 +19,7 @@
 <body class="login-bg">
 
 <div class="login">
-    <div class="message">サインインしてください</div>
+    <div class="message"></div>
     <div id="darkbannerwrap"></div>
     <?php $this -> load -> helper('form'); ?>
     <form action="javascript:void(0)" class="layui-form" id="form">

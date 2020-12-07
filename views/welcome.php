@@ -14,10 +14,10 @@
 <body>
     <div class="x-body">
 		<fieldset class="layui-elem-field" style="text-align:center;background:yellow;">
-			荻原建設様WEB予約
+			車両WEB予約
 		</fieldset>
         <fieldset class="layui-elem-field">
-            <legend>いらっしゃいませ：<?php echo $this->session->userdata('realname'); ?></legend>
+            <legend>ユーザー : <?php echo $this->session->userdata('realname'); ?> 様</legend>
                 <table class="layui-table" lay-even>
                 <thead>
                 <tr>
@@ -26,15 +26,15 @@
                 </thead>
                 <tbody>
 				<tr>
-                    <td>サーバーの言語種類 </td>
+                    <td>言語 </td>
                     <td>Japanese</td>
                 </tr>
 				<tr>
-                    <td>サーバオペレーティングシステム </td>
+                    <td>オペレーティングシステム </td>
                     <td>Microsoft Windows NT 5</td>
                 </tr>
                 <tr>
-                    <td>システムの場所フォルダ </td>
+                    <td>実装のフォルダ </td>
                     <td>C:\WINDOWS\system32</td>
                 </tr>
                 <tr>
@@ -42,15 +42,15 @@
                     <td>2.050727.3655</td>
                 </tr>
                 <tr>
-                    <th width="30%">サーバコンピュータ名</th>
+                    <th width="30%">ホスト名</th>
                     <td>http://127.0.0.1</td>
                 </tr>
                 <tr>
-                    <td>サーバIPアドレス</td>
+                    <td>ipアドレス</td>
                     <td>http://192.168.1.1</td>
                 </tr>
                 <tr>
-                    <td>サーバポート </td>
+                    <td>ポート</td>
                     <td>80</td>
                 </tr>
                 <tr>
@@ -70,7 +70,7 @@
             </div>
         </fieldset>
 		<fieldset class="layui-elem-field" style="text-align:center;background:yellow;">
-			荻原建設様WEB予約
+			車両WEB予約
 		</fieldset>
     </div>
 </body>

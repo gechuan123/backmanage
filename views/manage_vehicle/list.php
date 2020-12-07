@@ -8,10 +8,10 @@
 
 	<form class="search-form-inline" action="<?php echo base_url()?>ManageVehicle" id="searchform" method="post">
 		<div class="layui-input-inline">
-		<input type="text" style="width: 255px;" name="search_vehiclename" lay-verify="required" placeholder="車両名前" autocomplete="off" class="layui-input" value="<?=!empty($search_vehiclename)?$search_vehiclename:''?>" />
+		<input type="text" style="width: 255px;" name="search_vehiclename" lay-verify="required" placeholder="車両名" autocomplete="off" class="layui-input" value="<?=!empty($search_vehiclename)?$search_vehiclename:''?>" />
 		</div>
 		<div class="layui-input-inline">
-		<input type="text" style="width: 255px;" name="search_vehicleplate" lay-verify="required" placeholder="ナンバープレート" autocomplete="off" class="layui-input" value="<?=!empty($search_vehicleplate)?$search_vehicleplate:''?>">
+		<input type="text" style="width: 255px;" name="search_vehicleplate" lay-verify="required" placeholder="ナンバー" autocomplete="off" class="layui-input" value="<?=!empty($search_vehicleplate)?$search_vehicleplate:''?>">
 		</div>
 		<div class="layui-inline">
 			<div class="layui-input-inline">
@@ -46,9 +46,9 @@
             <th class="list-center">
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-			<th class="list-center">の種類</th>
-            <th class="list-center">名前</th>
-			<th class="list-center">ナンバープレート</th>
+			<th class="list-center">機種/車種</th>
+            <th class="list-center">車両名</th>
+			<th class="list-center">ナンバー</th>
 			<th class="list-center">画像</th>
             <th class="list-center">状態</th>
             <th class="list-center">作成時間</th>

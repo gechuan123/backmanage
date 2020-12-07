@@ -7,7 +7,7 @@ class ManageUseCount extends Curd
         parent::__construct();
         $this->load->helper('url');
     }
-    protected $controller = 'manage_user_count';
+    protected $controller = 'manage_use_count';
     protected $model = 'AGModel';
     protected $table = 'manage_user';
     protected $limit = 10 ;

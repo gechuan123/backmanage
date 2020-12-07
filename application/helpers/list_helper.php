@@ -195,7 +195,7 @@ if( !function_exists('btn_list') )
         }
 
         //保存
-        $html .= in_array('sort', $fields) ? '<button class="layui-btn" style="background-color:#01AAED;" onclick="save_sort(\'' . $url_list['sort'] . '\')"><i class="layui-icon">&#xe60f;</i>ソート</button>' : '';
+        $html .= in_array('sort', $fields) ? '<button class="layui-btn" style="background-color:#01AAED;" onclick="save_sort(\'' . $url_list['sort'] . '\')"><i class="layui-icon">&#xe60f;</i>保存</button>' : '';
 
         //無効
         $html .= in_array('forbidden', $fields) ? '<button class="layui-btn layui-bg-black" onclick="forbidden(\'' . $url_list['forbidden'] . '\')"><i class="layui-icon">&#x1006;</i>無効</button>' : '';

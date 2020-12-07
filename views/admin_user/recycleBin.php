@@ -16,7 +16,7 @@
             <th class="list-center">会員名</th>
             <th class="list-center">绑定メールボックス</th>
             <th class="list-center">绑定手机</th>
-            <th class="list-center">ソート</th>
+            <th class="list-center">順番</th>
             <th class="list-center">状態</th>
             <th class="list-center">最終ログイン時間</th>
             <th class="list-center">最終ログインIP</th>

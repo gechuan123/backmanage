@@ -19,7 +19,7 @@
             <th class="list-center">ID</th>
             <th class="list-center">グループ名</th>
             <th class="list-center">グループアイコン</th>
-            <th class="list-center">ソート</th>
+            <th class="list-center">順番</th>
             <th class="list-center">状態</th>
             <th class="list-center">作成時間</th>
 			<th class="list-center">更新時間</th>

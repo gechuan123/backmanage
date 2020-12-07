@@ -13,7 +13,7 @@
             </th>
             <th class="list-center">ID</th>
             <th class="list-center">キャラクター名</th>
-            <th class="list-center">ソート</th>
+            <th class="list-center">順番</th>
             <th class="list-center">状態</th>
             <th class="list-center">ユーザーリスト</th>
             <th class="list-center">授権</th>

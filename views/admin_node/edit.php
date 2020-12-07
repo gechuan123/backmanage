@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">ソート：</label>
+            <label class="layui-form-label">順番：</label>
             <div class="layui-input-block">
                 <input type="text" name="sort" placeholder="" autocomplete="off" class="layui-input" value="<?php echo $info['sort'] ;?>">
             </div>

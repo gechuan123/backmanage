@@ -1,7 +1,7 @@
 <?php $this->load->view('header');?>
 <body>
 <div class="x-nav">
-    <span class="layui-breadcrumb"><a href="javascript:;">人員管理</a><a href="javascript:;">人員情報</a></span>
+	<span class="layui-breadcrumb"><span>予約管理</span><span> > ユーザー</span></span>
 	<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="更新"><i class="layui-icon" style="line-height:30px">更新</i></a>
 </div>
 <div class="x-body">
@@ -11,7 +11,7 @@
 		<input type="text" style="width: 255px;" name="search_realname" lay-verify="required" placeholder="会員名" autocomplete="off" class="layui-input" value="<?=!empty($search_realname)?$search_realname:''?>" />
 		</div>
 		<div class="layui-input-inline">
-		<input type="text" style="width: 255px;" name="search_mobile" lay-verify="required" placeholder="携帯電話" autocomplete="off" class="layui-input" value="<?=!empty($search_mobile)?$search_mobile:''?>">
+		<input type="text" style="width: 255px;" name="search_mobile" lay-verify="required" placeholder="電話" autocomplete="off" class="layui-input" value="<?=!empty($search_mobile)?$search_mobile:''?>">
 		</div>
 		<div class="layui-inline">
 			<div class="layui-input-inline">
@@ -47,9 +47,9 @@
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th class="list-center">会員名</th>
-			<th class="list-center">携帯電話</th>
-            <th class="list-center">绑定メールボックス</th>
-            <th class="list-center">ソート</th>
+			<th class="list-center">電話</th>
+            <th class="list-center">メールアドレス</th>
+            <th class="list-center">順番</th>
             <th class="list-center">状態</th>
             <th class="list-center">最終ログイン時間</th>
             <th class="list-center">最終ログインIP</th>

@@ -47,8 +47,8 @@
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
             <th class="list-center">番号</th>
-			<th class="list-center">機種</th>
-            <th class="list-center">ソート</th>
+			<th class="list-center">機種/車種</th>
+            <th class="list-center">順番</th>
             <th class="list-center">状態</th>
             <th class="list-center">作成時間</th>
             <th class="list-center">更新時間</th>

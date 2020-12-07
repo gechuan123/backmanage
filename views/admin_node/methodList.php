@@ -16,7 +16,7 @@
                 <th class="list-center">ノード名</th>
                 <th class="list-center">の種類</th>
                 <th class="list-center">何級</th>
-                <th class="list-center">ソート</th>
+                <th class="list-center">順番</th>
                 <th class="list-center">状態</th>
                 <th class="list-center">作成時間</th>
                 <th class="list-center">更新時間</th>

@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">メールボックス：</label>
+            <label class="layui-form-label">メールアドレス：</label>
             <div class="layui-input-block">
                 <input type="text" name="email" lay-verify="email|db_email" placeholder="入力されていません。!" autocomplete="off" class="layui-input">
             </div>
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">ソート：</label>
+            <label class="layui-form-label">順番：</label>
             <div class="layui-input-block">
                 <input type="text" name="sort" placeholder="" autocomplete="off" class="layui-input">
             </div>

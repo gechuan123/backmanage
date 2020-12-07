@@ -55,12 +55,12 @@ body {
 <div class="x-body">
     <form class="layui-form" action="javascript:void(0);" id="form">
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-			<legend>情報の設定</legend>
+			<legend>車両設定</legend>
 		</fieldset>
 		<div class="layui-form-item">
             <label class="layui-form-label">メールボックス：</label>
             <div class="layui-input-block">
-                <input type="text" name="email" id="email" lay-verify="email|db_email" placeholder="入力されていません。!" autocomplete="off" class="layui-input">
+                <input type="text" name="email" id="email" lay-verify="email|db_email" placeholder="入力されていません!" autocomplete="off" class="layui-input">
             </div>
         </div>
 		
@@ -93,12 +93,12 @@ body {
             </div>
         </div>
 		<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-			<legend>時間の設定</legend>
+			<legend>時間設定</legend>
 		</fieldset>
         <div class="layui-form-item">
             <div class="layui-input-block" style="text-align:center">
 				<input type="hidden" name="user_id" id="user_id">
-                <button class="layui-btn" lay-submit lay-filter="add">時間の設定</button>
+                <button class="layui-btn" lay-submit lay-filter="add">時間設定</button>
             </div>
         </div>
     </form>
@@ -233,7 +233,7 @@ layui.use(['form','layer','laydate'], function(){
     });
 
     form.on('submit(add)', function(data){
-		s_admin_show('開始時間の設定', '<?php echo base_url()?>ManageUse/recycleBin',800,700);
+		s_admin_show('開始時間設定', '<?php echo base_url()?>ManageUse/recycleBin',800,700);
     });
 	
 	$(function(){

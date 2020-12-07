@@ -11,12 +11,12 @@
             <th class="list-center">
                 <div class="layui-unselect header layui-form-checkbox" lay-skin="primary"><i class="layui-icon">&#xe605;</i></div>
             </th>
-            <th class="list-center">車両名前</th>
-			<th class="list-center">ナンバープレート</th>
-            <th class="list-center">ソート</th>
+			<th class="list-center">機種/車種</th>
+            <th class="list-center">車両名</th>
+			<th class="list-center">ナンバー</th>
+			<th class="list-center">画像</th>
             <th class="list-center">状態</th>
             <th class="list-center">作成時間</th>
-            <th class="list-center">更新時間</th>
         </thead>
         <tbody>
         <?php foreach ($list as $item): ?>

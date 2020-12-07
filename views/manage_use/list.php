@@ -1,7 +1,7 @@
 <?php $this->load->view('header');?>
 <body>
 <div class="x-nav">
-    <span class="layui-breadcrumb"><a href="javascript:;">人員管理</a><a href="javascript:;">予約情報</a></span>
+	<span class="layui-breadcrumb"><span>予約管理</span><span> > リスト</span></span>
 	<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="更新"><i class="layui-icon" style="line-height:30px">更新</i></a>
 </div>
 <div class="x-body">
@@ -126,21 +126,11 @@ $('.is_check').change(function(){
 	
 	var is_check = $(this).val();
 	
-	layer.confirm('変更を確認する？',{btn:['確定', 'キャンセル'],title:'荻原建設'},function(indexa){
-		parent.layer.close(indexa);
-		var show = layer.open({
-			type: 3,
-			area: ['400px', '100px'],
-
-			success: function(){
-				$.post('<?=base_url()?>Appoint/Icon/ajaxSelectIsCheck ',{is_check:is_check},function(data){
-					
-					 if(data == "ok"){
-						 location.reload();
-					 }
-				});
-			}
-		});
+	$.post('<?=base_url()?>Appoint/Icon/ajaxSelectIsCheck ',{is_check:is_check},function(data){
+		
+		 if(data == "ok"){
+			 location.reload();
+		 }
 	});
 })
 </script>
