@@ -44,6 +44,7 @@ class Appointment extends Appoint
                        $vehicle_arr[$k]['className'] = 'red';
                    }
                    
+                   
                }
 
                

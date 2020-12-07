@@ -14,15 +14,26 @@ class Index extends Appoint
         $typewhere['isdelete'] = '0';
         $typewhere['status'] = '1';
         $data['typeinfo'] = $this->db->where($typewhere)->get('ci_manage_vehicle_type')->result_array();
-        foreach($data['typeinfo'] as $key => $val)
-        {
-            $vehiclewhere['isdelete'] = '0';
-            $vehiclewhere['status'] = '1';
-            $vehiclewhere['type_id'] = $val['id'];
-            $data['carinfo'][] = $this->db->where($vehiclewhere)->get('ci_manage_vehicle')->result_array();
-        }
+        $vehiclewhere['isdelete'] = '0';
+        $vehiclewhere['status'] = '1';
+        $vehiclewhere['type_id'] = $data['typeinfo'][0]['id'];
+        $data['car_info']  = $this->db->where($vehiclewhere)->get('ci_manage_vehicle')->result_array();
 
 	    $this->load->view('appoint/index', $data);
+    }
+
+
+    public function Getcarinfo(){
+
+        $params = $_GET;
+        $data = [];
+        $vehiclewhere['isdelete'] = '0';
+        $vehiclewhere['status'] = '1';
+        $vehiclewhere['type_id'] = $params['id'];
+        $data = $this->db->where($vehiclewhere)->get('ci_manage_vehicle')->result_array();
+
+
+        die(json_encode(['status'=>'successful','data'=>$data]));
     }
 
 }

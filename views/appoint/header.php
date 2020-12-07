@@ -68,7 +68,7 @@
 		<div class="site-text" style="float: right;margin-right:25%;margin-top:-19px">
 				<a href="javascript:void(0)" style="font-size:16px;font-weight:bold;"></a>
 		</div>
-		<div class="site-text" style="float: right;margin-right:-1%;margin-top:-20px">
+		<div class="site-text" style="float: right;margin-right:-1%;margin-top:-55px">
 			<button type="button" id="log_out" class="layui-btn layui-btn-radius layui-btn-danger">ログアウト</button>
 		</div>  
 		<?php }else{?>

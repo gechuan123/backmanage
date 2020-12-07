@@ -28,7 +28,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-inline">
-                <label class="layui-form-label" style="width:120px">メールボックス</label>
+                <label class="layui-form-label" style="width:120px">メールアドレス</label>
                 <div class="layui-input-inline" style="margin-top: 11px;">
                     <?php echo $user_info['email']?>
                 </div>
@@ -37,10 +37,10 @@
         </fieldset>
         <?php if($id){?>
         <fieldset class="layui-elem-field site-demo-button" style="margin-top: 15px;">
-        <legend>予約情報</legend>
+        <legend>予約時間帯</legend>
             <div class="layui-form-item">
                 <div class="layui-inline">
-                <label class="layui-form-label" style="width:120px">開始使用時間</label>
+                <label class="layui-form-label" style="width:120px">開始時間</label>
                 <div class="layui-input-inline">
                     <input type="text" class="layui-input" name="start_time" id="start" placeholder=" - " lay-key="11" >
                 </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="layui-form-item">
                 <div class="layui-inline">
-                <label class="layui-form-label" style="width:120px">終了利用時間</label>
+                <label class="layui-form-label" style="width:120px">終了時間</label>
                 <div class="layui-input-inline">
                     <input type="text" class="layui-input" name="end_time" id="end" placeholder=" - " lay-key="10" >
                 </div>
@@ -65,8 +65,8 @@
     </fieldset>
     <?php }?>
     <fieldset class="layui-elem-field site-demo-button" style="margin-top: 15px;">
-        <legend>車両予約の詳細</legend>
-    <div class="main" style="margin-left:30px;margin-right:30px">
+        <legend >車両予約の詳細</legend>
+    <div class="main" style="margin-top:30px;margin-left:30px;margin-right:30px">
 		
 	    <div id="calendar1"></div>
 	</div>
@@ -118,7 +118,7 @@
         timeFormat: 'HH:mm', //日程事件的时间格式
         //      timeFormat: 'HH:mm{ - H:mm}',{agenda: ‘h:mm{ - h:mm}}
         buttonText: { //各按钮的显示文本信息
-            today: '今日/今週',
+            today: '今月/今週/今日',
             month: '月',
             agendaWeek: '週間',
             agendaDay: '日',

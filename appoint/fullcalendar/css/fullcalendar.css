@@ -1160,3 +1160,4 @@ a.fc-more:hover {
 .fc-unthemed .fc-list-empty {
 	background-color: #eee
 }
+.fc-highlight:hover{background:red;}
