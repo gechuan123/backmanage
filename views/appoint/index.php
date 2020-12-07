@@ -86,7 +86,7 @@
 											   <?php foreach($car_info as $k=>$v){?>
 											   <li style="margin-left:2%;height:auto;float:none;display:inline-block;">
 													<div class="hasbg">
-														<img src="/appoint/vehicle/<?php echo $v['vehicleimage']?>">
+														<img src="<?php echo base_url() ?>appoint/vehicle/<?php echo $v['vehicleimage']?>">
 													</div>
 													<div class="name"><?php echo $v['vehiclename']?></div>
 													<div class="layui-right">
