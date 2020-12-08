@@ -27,13 +27,16 @@ class ManageUseCount extends Curd
             $where['isdelete'] = "0";
             $where['status'] = "1";
             $vehicle_list = $this->db->where($where)->order_by('id','ASC')->get('ci_manage_vehicle')->result_array();
+			$data['type_list'][$key]['vehicle_list'] = $vehicle_list;
+			
+			
+			// print_r($data['type_list']);exit;
             // if(count($vehicle_list)<=0){
-                // unset($data['type_list'][$key]);
-				
+                // unset($data['type_list'][$key]);	
             // }else{
                 // $data['type_list'][$key]['vehicle_list'] = $vehicle_list;
             // }
-			$data['type_list'][$key]['vehicle_list'] = $vehicle_list;
+			// $data['type_list'][$key]['vehicle_list'] = $vehicle_list;
         }
 		
 		//print_r($data['type_list']);exit;
@@ -57,20 +60,14 @@ class ManageUseCount extends Curd
             $data['vehicle_info'] = $this->db->where(['id'=>$_GET['vehicle_id']])->get('ci_manage_vehicle')->row_array();
         }else{
             $type_info = $this->db->where(['status'=>'1','isdelete'=>'0'])->order_by('id ASC')->get('ci_manage_vehicle_type')->result_array()[0];
-			
 			if(!empty($type_info))
 			{
-				if(count($this->db->where(['type_id'=>$type_info['id']])->order_by('id ASC')->get('ci_manage_vehicle')->result_array()) > 0)
-				{
+				if(count($this->db->where(['type_id'=>$type_info['id']])->order_by('id ASC')->get('ci_manage_vehicle')->result_array()) > 0){
 					$data['vehicle_info'] = $this->db->where(['type_id'=>$type_info['id']])->order_by('id ASC')->get('ci_manage_vehicle')->result_array()[0];
-				}
-				else
-				{
+				}else{
 					$data['vehicle_info'] = [];
 				}
-			}
-			else
-			{
+			}else{
 				$data['vehicle_info'] = [];
 			}
         }

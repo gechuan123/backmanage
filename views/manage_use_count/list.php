@@ -66,13 +66,13 @@
             <div class="layui-input-block">
 			<?php if(count($type_list)>0){?>
 				<?php foreach($type_list as $key => $val){?>
-
+					<?php if(count($val['vehicle_list'])>0){?>
 					<?php if(count($vehicle_info)>0 && $val['id'] == $vehicle_info['type_id']){?>
 						<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>" checked>
 					<?php }else{?>
 						<input type="radio" name="type_radio" lay-filter="type_radio" value="<?=$val['id']?>" title="<?=$val['typename']?>">
 					<?php }?>
-					
+					<?php }?>
 				<?php }?>
 			<?php }?>
             </div>
