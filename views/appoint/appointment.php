@@ -103,10 +103,25 @@
 	<script>
     
 	$(function() {
-    var day2 = new Date();
-    day2.setTime(day2.getTime());
-    var get = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
+    //var day2 = new Date();
+    //day2.setTime(day2.getTime());
+    //var get = day2.getFullYear()+"-" + (day2.getMonth()+1) + "-" + day2.getDate();
     // var get = '2020-11-14';
+	var d=new Date();
+	var year=d.getFullYear();
+	var month=change(d.getMonth()+1);
+	var day=change(d.getDate());
+	var hour=change(d.getHours());
+	var minute=change(d.getMinutes());
+	var second=change(d.getSeconds());
+	function change(t){
+		if(t<10){
+			return "0"+t;
+		}else{
+			return t;
+		}
+	}
+	var nowtime=year+'-'+month;
     //$("#calendar").fullCalendar({
     var calendar = $('#calendar1').fullCalendar({
         header: { //设置日历头部信息，false，则不显示头部信息。包括left，center,right左中右三个位置
@@ -157,7 +172,7 @@
         handleWindowResize: true, //是否随浏览器窗口大小变化而自动变化。
         defaultView: 'month', //初始化时默认视图，默认是月month，agendaWeek是周，agendaDay是当天
         //      slotEventOverlap: false,//事件是否可以重叠覆盖
-        defaultDate: get, //默认显示那一天的日期视图getDates(true)2020-05-10
+        defaultDate: nowtime, //默认显示那一天的日期视图getDates(true)2020-05-10
         nowIndicator: true, //周/日视图中显示今天当前时间点（以红线标记），默认false不显示
         eventLimit: false, //数据条数太多时，限制显示条数（多余的以“+2more”格式显示），默认false不限制,支持输入数字设定固定的显示条数
         eventLimitText: "更多", //当一块区域内容太多以"+2 more"格式显示时，这个more的名称自定义（应该与eventLimit: true一并用）
