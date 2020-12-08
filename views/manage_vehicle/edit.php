@@ -25,7 +25,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">ナンバープレート：</label>
             <div class="layui-input-block">
-                <input type="text" name="vehicleplate" lay-verify="vehicleplate|db_vehicleplate" placeholder="ナンバープレート 長さ2-16間。" autocomplete="off" class="layui-input" maxlength="16" value="<?php echo $vehicleplate;?>">
+                <input type="text" name="vehicleplate" lay-verify="vehicleplate|db_vehicleplate" placeholder="ナンバープレート 長さ1-16間。" autocomplete="off" class="layui-input" maxlength="16" value="<?php echo $vehicleplate;?>">
             </div>
         </div>
 		
@@ -74,24 +74,27 @@ layui.use(['form','layer','upload'], function(){
 	var upload = layui.upload;
 	
 	var uploadInst = upload.render({
-			elem: '#img'
-			,url: '<?php echo base_url()?>Appoint/Icon/ajaxUpImage'
-			,before: function(obj){
-			obj.preview(function(index, file, result){
-				$('#show_vehicleimage').attr('src', result); 
-			});
-		}
-		,done: function(res){
+			elem: '#img',
+			url: '<?php echo base_url()?>Appoint/Icon/ajaxUpImage',
+			size: 5000000,
+			before: function(obj){
+				obj.preview(function(index, file, result){
+					$('#show_vehicleimage').attr('src', result); 
+				});
+			},
+		done: function(res){
 			if(res.code > 0){
 				return layer.msg('失敗');
 			}
+			var image = '<img src="'+res.pic+'" width="200px" height="200px">';
 
+            $('#image').html(image);
 			$('#vehicleimage').val(res.name);
 			$('#vehicleimage_thumb').val(res.picthumb);
-		}
-		,error: function(){
+		},
+		error: function(){
 			var Textimage = $('#Textimage');
-			Textimage.html('<span style="color: #FF5722;">失敗</span> <a class="layui-btn layui-btn-xs demo-reload">リトライ</a>');
+			Textimage.html('<span style="color: #FF5722;">失敗</span>');
 			Textimage.find('.demo-reload').on('click', function(){
 				uploadInst.upload();
 			});
@@ -111,7 +114,7 @@ layui.use(['form','layer','upload'], function(){
             }
         },
 		vehicleplate: function(value){
-            if(value.length < 2 || value.length > 16){
+            if(value.length < 1 || value.length > 16){
                 return 'ナンバープレート 長さ2-16間。';
             }
         },

@@ -119,8 +119,13 @@ class Icon extends Appoint
     {
         $this->load->helper('url');
         $formpic = key($_FILES);
+		
         //文件处理部分
         if(false === empty($_FILES[$formpic]['tmp_name'])){
+			
+			
+			//print_r($_FILES[$formpic]['tmp_name']);exit;
+			
             //设置文件上传的路径
             $upload['upload_path'] = "./appoint/vehicle/";
             //限制文件上传的类型
@@ -135,7 +140,6 @@ class Icon extends Appoint
             $this->upload->do_upload($formpic);
             //返回文件上传信息
             $image = $this->upload->data();
-            //var_dump($image);exit;
             //返回文件上传名字
             $data = $image['file_name'];
             $this->dealthumb($image['full_path']);
