@@ -1,7 +1,7 @@
 <?php $this->load->view('header');?>
 <body>
 <div class="x-nav">
-    <span class="layui-breadcrumb"><a href="javascript:;">車両管理</a><a href="javascript:;">車両種類</a></span>
+	<span class="layui-breadcrumb"><span>車両管理</span><span> > 車両種類</span></span>
 	<a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" href="javascript:location.replace(location.href);" title="更新"><i class="layui-icon" style="line-height:30px">更新</i></a>
 </div>
 <div class="x-body">

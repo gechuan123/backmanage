@@ -23,7 +23,7 @@
 
 <body>
 <div class="x-nav">
-	<span class="layui-breadcrumb"><a href="<?=base_url()?>AppointmentReg">車両管理</a><a href="javascript:;">車両統計</a></span>
+	<span class="layui-breadcrumb"><span>車両管理</span><span> > 車両統計</span></span>
 
 </div>
 <div class="x-body">
