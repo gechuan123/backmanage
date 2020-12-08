@@ -13,10 +13,20 @@ class Index extends Appoint
         $data = [];
         $typewhere['isdelete'] = '0';
         $typewhere['status'] = '1';
-        $data['typeinfo'] = $this->db->where($typewhere)->get('ci_manage_vehicle_type')->result_array();
+        $typeinfo = $this->db->where($typewhere)->get('ci_manage_vehicle_type')->result_array();
+		$data['typeinfo'] = [];
+
         $vehiclewhere['isdelete'] = '0';
         $vehiclewhere['status'] = '1';
-        $vehiclewhere['type_id'] = $data['typeinfo'][0]['id'];
+        
+		foreach($typeinfo as $k=>$v){
+			 $car = $this->db->where(['type_id'=>$v['id']])->where($vehiclewhere)->get('ci_manage_vehicle')->result_array();
+			 if(!empty($car)){
+				 $data['typeinfo'][] = $typeinfo[$k];
+			 }
+		}
+
+		$vehiclewhere['type_id'] = $data['typeinfo'][0]['id'];
         $data['car_info']  = $this->db->where($vehiclewhere)->get('ci_manage_vehicle')->result_array();
 
 	    $this->load->view('appoint/index', $data);
