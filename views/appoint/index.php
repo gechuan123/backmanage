@@ -88,7 +88,7 @@
 													<div class="hasbg">
 														<img src="<?php echo base_url() ?>appoint/vehicle/<?php echo $v['vehicleimage']?>">
 													</div>
-													<div class="name"><?php echo $v['vehiclename']?></div>
+													<div class="name"><?php echo $v['vehiclename']?>[<?php echo $v['vehicleplate']?>]</div>
 													<div class="layui-right">
 														
 													</div>
@@ -213,15 +213,13 @@ layui.use(['layer', 'form','element'], function() {
 						if(data.status=="successful"){
 							  var arr = data.data;
 							  var html = '';
-							  
-					
-									
+
 									arr.forEach(function (item, key) {
 										html+='<li style="margin-left:2%;height:auto;float:none;display:inline-block;">'
 											html+='<div class="hasbg">'
 												html+='<img src="<?php echo base_url() ?>appoint/vehicle/'+item.vehicleimage+'">'
 											html+='</div>'
-											html+='<div class="name">'+item.vehiclename+'</div>'
+											html+='<div class="name">'+item.vehiclename+'['+item.vehicleplate+']</div>'
 											html+='<div class="layui-right">'
 												
 											html+='</div>'

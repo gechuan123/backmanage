@@ -27,17 +27,12 @@
                 <input type="text" name="vehicleplate" lay-verify="vehicleplate|db_vehicleplate" placeholder="ナンバープレート 長さ2-16間。" autocomplete="off" class="layui-input" maxlength="16">
             </div>
         </div>
-		
-<div class="layui-upload">
-  <button type="button" class="layui-btn" id="test1">上传图片</button>
-  <div class="layui-upload-list">
-    <img class="layui-upload-img" id="demo1">
-    <p id="demoText"></p>
-  </div>
-</div>
 
 		<div class="layui-form-item">
-            <label class="layui-form-label">画像：</label>	
+            <label class="layui-form-label">画像：</label>
+			<div class="layui-upload">
+			<font color="red">(画像サイズは10m以下でお願いします)</font>
+			</div>
 			<div class="layui-upload">
 				<button type="button" class="layui-btn" id="img">画像</button>
 				<div class="layui-input-block" id="image">
@@ -114,7 +109,7 @@ layui.use(['form','layer','upload'], function(){
 			if(res.code > 0){
 				return layer.msg('失敗');
 			}
-			var image = '<img src="'+res.pic+'" width="200px" height="200px">';
+			var image = '<img src="'+res.pic+'" width="300px" height="300px">';
 
             $('#image').html(image);
 			$('#vehicleimage').val(res.name);

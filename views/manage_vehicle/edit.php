@@ -32,6 +32,9 @@
 		<div class="layui-form-item">
             <label class="layui-form-label">画像：</label>	
 			<div class="layui-upload">
+				<font color="red">(画像サイズは10m以下でお願いします)</font>
+			</div>
+			<div class="layui-upload">
 				<button type="button" class="layui-btn" id="img">画像</button>
 				<div class="layui-input-block">
 					<img height="200px" width="300px" class="layui-upload-img" id="show_vehicleimage" src="<?php echo base_url()?>appoint/vehicle/<?php echo $vehicleimage;?>">
@@ -86,7 +89,7 @@ layui.use(['form','layer','upload'], function(){
 			if(res.code > 0){
 				return layer.msg('失敗');
 			}
-			var image = '<img src="'+res.pic+'" width="200px" height="200px">';
+			var image = '<img src="'+res.pic+'" width="300px" height="300px">';
 
             $('#image').html(image);
 			$('#vehicleimage').val(res.name);

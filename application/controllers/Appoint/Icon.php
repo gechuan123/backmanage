@@ -131,7 +131,7 @@ class Icon extends Appoint
             //限制文件上传的类型
             $upload['allowed_types'] = 'jpeg|jpg|gif|png';
             //限制文件上传的大小
-            $upload['max_size'] = 2048;
+            $upload['max_size'] = 10240;
             //设置文件上传的路径
             $upload['file_name'] = date('YmdHis', time()).rand(10000, 99999);
             //加载文件上传配置信息
