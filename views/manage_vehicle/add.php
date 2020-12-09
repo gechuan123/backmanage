@@ -31,7 +31,7 @@
 		<div class="layui-form-item">
             <label class="layui-form-label">画像：</label>
 			<div class="layui-upload">
-			<font color="red">(画像サイズは10m以下でお願いします)</font>
+				<font color="red">(画像サイズは10m以下でお願いします)</font>
 			</div>
 			<div class="layui-upload">
 				<button type="button" class="layui-btn" id="img">画像</button>
